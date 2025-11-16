@@ -166,12 +166,26 @@ export function ArticleList() {
     <section id="articles" className="py-16 sm:py-24 mt-16 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl text-center">
-            Latest Articles
-          </h2>
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 text-center">
-            Discover insights, tutorials, and stories about technology and development
-          </p>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">
+                Latest Articles
+              </h2>
+              <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+                Discover insights, tutorials, and stories about technology and development
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setLoading(true)
+                fetchArticles()
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              disabled={loading}
+            >
+              {loading ? 'Refreshing...' : '🔄 Refresh'}
+            </button>
+          </div>
         </div>
 
         {articles.length === 0 ? (
