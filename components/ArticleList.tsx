@@ -14,6 +14,13 @@ export function ArticleList() {
 
   useEffect(() => {
     fetchArticles()
+    
+    // Refresh articles every 30 seconds to catch newly published articles
+    const refreshInterval = setInterval(() => {
+      fetchArticles()
+    }, 30000)
+    
+    return () => clearInterval(refreshInterval)
   }, [currentPage])
 
   const fetchArticles = async () => {
@@ -38,12 +45,27 @@ export function ArticleList() {
         .eq('status', 'published')
       
       // Then fetch the paginated articles
-      const { data, error } = await supabase
+      // Fetch all published articles and sort them properly
+      const { data: allArticles, error: fetchError } = await supabase
         .from('articles')
         .select('*')
         .eq('status', 'published')
-        .order('published_at', { ascending: false })
-        .range(offset, offset + articlesPerPage - 1)
+      
+      if (fetchError) {
+        console.error('Error fetching articles:', fetchError)
+        throw fetchError
+      }
+      
+      // Sort articles: use published_at if available, otherwise use created_at
+      const sortedArticles = (allArticles || []).sort((a: any, b: any) => {
+        const dateA = a.published_at || a.created_at
+        const dateB = b.published_at || b.created_at
+        return new Date(dateB).getTime() - new Date(dateA).getTime()
+      })
+      
+      // Apply pagination
+      const data = sortedArticles.slice(offset, offset + articlesPerPage)
+      const error = null
 
       if (error) {
         console.error('Error fetching articles:', error)
