@@ -70,11 +70,33 @@ export function ArticleList() {
         throw fetchError
       }
       
+      // Filter out articles without slugs (but log them for debugging)
+      const articlesWithSlugs = (allArticles || []).filter((article: any) => {
+        if (!article.slug || article.slug.trim() === '') {
+          console.warn('⚠️ Filtering out article without slug:', {
+            id: article.id,
+            title: article.title,
+            status: article.status
+          })
+          return false
+        }
+        return true
+      })
+      
       // Sort articles: use published_at if available, otherwise use created_at
-      const sortedArticles = (allArticles || []).sort((a: any, b: any) => {
+      const sortedArticles = articlesWithSlugs.sort((a: any, b: any) => {
         const dateA = a.published_at || a.created_at
         const dateB = b.published_at || b.created_at
         return new Date(dateB).getTime() - new Date(dateA).getTime()
+      })
+      
+      console.log('After filtering and sorting:', {
+        total: sortedArticles.length,
+        articles: sortedArticles.map((a: any) => ({
+          title: a.title,
+          slug: a.slug,
+          date: a.published_at || a.created_at
+        }))
       })
       
       // Apply pagination
@@ -252,7 +274,7 @@ export function ArticleList() {
                             
                             <h2 className="text-xl font-bold leading-tight text-slate-900 dark:text-slate-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                               <Link 
-                                href={`/articles/${article.slug}`}
+                                href={`/${article.slug}`}
                                 className="block"
                                 scroll={true}
                                 onClick={(e) => {
@@ -287,7 +309,7 @@ export function ArticleList() {
                             {/* Read More Link */}
                             <div className="flex items-center">
                               <Link
-                                href={`/articles/${article.slug}`}
+                                href={`/${article.slug}`}
                                 className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
                                 scroll={true}
                                 onClick={(e) => {
