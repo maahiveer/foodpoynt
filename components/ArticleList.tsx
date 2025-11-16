@@ -51,6 +51,14 @@ export function ArticleList() {
       }
 
       console.log('Articles fetched:', data)
+      // Debug: Log slugs to check if they exist
+      if (data) {
+        data.forEach((article: any) => {
+          if (!article.slug) {
+            console.warn('Article missing slug:', article.id, article.title)
+          }
+        })
+      }
       setArticles(data || [])
       
       // Calculate total pages
@@ -141,7 +149,13 @@ export function ArticleList() {
           </div>
         ) : (
                   <div className="mt-12 max-w-4xl mx-auto space-y-6">
-                    {articles.map((article) => (
+                    {articles.map((article) => {
+                      // Ensure slug exists
+                      if (!article.slug) {
+                        console.error('Article missing slug:', article.id, article.title)
+                        return null
+                      }
+                      return (
                       <article
                         key={article.id}
                         className="group relative bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
@@ -179,6 +193,12 @@ export function ArticleList() {
                                 href={`/articles/${article.slug}`}
                                 className="block"
                                 scroll={true}
+                                onClick={(e) => {
+                                  if (!article.slug) {
+                                    e.preventDefault()
+                                    console.error('Article slug is missing:', article)
+                                  }
+                                }}
                               >
                                 {article.title}
                               </Link>
@@ -208,6 +228,12 @@ export function ArticleList() {
                                 href={`/articles/${article.slug}`}
                                 className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
                                 scroll={true}
+                                onClick={(e) => {
+                                  if (!article.slug) {
+                                    e.preventDefault()
+                                    console.error('Article slug is missing:', article)
+                                  }
+                                }}
                               >
                                 Read more
                                 <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,7 +244,8 @@ export function ArticleList() {
                           </div>
                 </div>
               </article>
-            ))}
+                      )
+                    })}
           </div>
         )}
         
