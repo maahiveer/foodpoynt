@@ -29,7 +29,9 @@ async function fetchPublishedArticles(limit = 10): Promise<ArticleRecord[]> {
     return []
   }
 
-  return data.filter((article) => !!article.slug && article.slug.trim() !== '')
+  return data.filter(
+    (article: ArticleRecord) => !!article.slug && article.slug.trim() !== ''
+  )
 }
 
 const formatDate = (dateString: string) => {
