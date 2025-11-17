@@ -262,20 +262,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           }}
         />
         
-        {/* Simple article container */}
-        <main className="py-8 flex justify-center">
-          <div className="w-full max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-end mb-8">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
-              >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                Home
-              </Link>
-            </div>
+        {/* Simple article container without extra header chrome */}
+        <main className="py-8">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
             <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
               <div className="article-content">
                 <div dangerouslySetInnerHTML={{ __html: article.content }} />
