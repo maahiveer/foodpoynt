@@ -100,11 +100,6 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params
   
-  // Set no-cache headers to prevent any caching
-  headers().set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
-  headers().set('Pragma', 'no-cache');
-  headers().set('Expires', '0');
-  
   // Reject reserved paths that should not be handled by this route
   const reservedPaths = ['', 'about', 'contact', 'privacy', 'terms', 'admin', 'articles', 'preview']
   if (!slug || reservedPaths.includes(slug)) {
