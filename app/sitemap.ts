@@ -1,6 +1,12 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 
+interface ArticleSitemap {
+  slug: string
+  updated_at: string | null
+  published_at: string | null
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://tracksatscale.vercel.app'
   
@@ -59,9 +65,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .order('published_at', { ascending: false })
 
       if (!error && articles) {
-        articlePages = articles
-          .filter((article) => article.slug && article.slug.trim() !== '')
-          .map((article) => ({
+        articlePages = (articles as ArticleSitemap[])
+          .filter((article: ArticleSitemap) => article.slug && article.slug.trim() !== '')
+          .map((article: ArticleSitemap) => ({
             url: `${baseUrl}/${article.slug}`,
             lastModified: article.updated_at
               ? new Date(article.updated_at)
