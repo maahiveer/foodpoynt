@@ -316,7 +316,7 @@ body {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight;
     color: inherit;
   }
-  
+
   /* Force white text in header section and any banner - ALL ELEMENTS */
   .article-content .header-section,
   .article-content .header-section *,
@@ -329,6 +329,30 @@ body {
   .article-content .header-section span,
   .article-content .header-section .meta-info,
   .article-content .header-section .meta-item {
+    color: white !important;
+  }
+
+  /* Force white text for h1 headings in sections with gradients or dark backgrounds */
+  .article-content section[style*="gradient"] h1,
+  .article-content section[style*="background: linear-gradient"] h1,
+  .article-content section[style*="background:linear-gradient"] h1,
+  .article-content section[style*="background-image: linear-gradient"] h1,
+  .article-content div[style*="gradient"] h1,
+  .article-content div[style*="background: linear-gradient"] h1,
+  .article-content div[style*="background:linear-gradient"] h1,
+  .article-content div[style*="background-image: linear-gradient"] h1,
+  .article-content [style*="gradient"] h1,
+  .article-content [style*="background: linear-gradient"] h1,
+  .article-content [style*="background:linear-gradient"] h1,
+  .article-content [style*="background-image: linear-gradient"] h1,
+  .article-content [style*="background-color: rgb(15, 23, 42)"] h1,
+  .article-content [style*="background-color:rgb(15, 23, 42)"] h1,
+  .article-content [style*="background-color: #0f172a"] h1,
+  .article-content [style*="background-color:#0f172a"] h1,
+  .article-content [style*="background-color: rgb(30, 41, 59)"] h1,
+  .article-content [style*="background-color:rgb(30, 41, 59)"] h1,
+  .article-content [style*="background-color: #1e293b"] h1,
+  .article-content [style*="background-color:#1e293b"] h1 {
     color: white !important;
   }
   
