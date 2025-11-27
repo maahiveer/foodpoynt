@@ -8,8 +8,8 @@ interface ArticleSitemap {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://tracksatscale.vercel.app'
-  
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app'
+
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -29,6 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/categories`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/privacy`,
@@ -52,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Get published articles from database
   let articlePages: MetadataRoute.Sitemap = []
-  
+
   try {
     if (
       process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -72,8 +78,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: article.updated_at
               ? new Date(article.updated_at)
               : article.published_at
-              ? new Date(article.published_at)
-              : new Date(),
+                ? new Date(article.published_at)
+                : new Date(),
             changeFrequency: 'weekly' as const,
             priority: 0.9,
           }))
@@ -83,7 +89,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Error fetching articles for sitemap:', error)
   }
 
-  return [...staticPages, ...articlePages]
+  // Get categories from database
+  let categoryPages: MetadataRoute.Sitemap = []
+
+  try {
+    if (
+      process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co'
+    ) {
+      const { data: categories, error } = await supabase
+        .from('categories')
+        .select('slug, created_at')
+        .order('name', { ascending: true })
+
+      if (!error && categories) {
+        categoryPages = categories.map((category: any) => ({
+          url: `${baseUrl}/categories/${category.slug}`,
+          lastModified: new Date(category.created_at),
+          changeFrequency: 'weekly' as const,
+          priority: 0.8,
+        }))
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching categories for sitemap:', error)
+  }
+
+  return [...staticPages, ...categoryPages, ...articlePages]
 }
 
 // Force dynamic rendering so newly published articles appear immediately

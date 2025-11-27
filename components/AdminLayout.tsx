@@ -3,15 +3,16 @@
 import { useAuth } from '@/components/AuthProvider'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Plus, 
-  Settings, 
-  LogOut, 
+import {
+  LayoutDashboard,
+  FileText,
+  Plus,
+  Settings,
+  LogOut,
   User,
   Menu,
-  X
+  X,
+  FolderOpen
 } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'
@@ -51,6 +52,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const navigation = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Articles', href: '/admin/articles', icon: FileText },
+    { name: 'Categories', href: '/admin/categories', icon: FolderOpen },
     { name: 'New Article', href: '/admin/articles/new', icon: Plus },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ]

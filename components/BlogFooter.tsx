@@ -1,27 +1,14 @@
 import Link from 'next/link'
 
-// TrackScale Logo Component for Footer
-function TrackScaleLogo({ className = "h-8" }: { className?: string }) {
+// PickPoynt Logo Component for Footer
+function PickPoyntLogo({ className = "h-8" }: { className?: string }) {
   return (
-    <div className={`flex items-center ${className}`}>
-      <span className="text-white font-bold text-xl tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-        tr
-        <span className="inline-flex items-center justify-center w-5 h-5 mx-0.5 rounded-sm bg-gradient-to-r from-orange-500 to-red-500">
-          {/* House/Building Icon */}
-          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-          </svg>
-        </span>
-        cksc
-        <span className="inline-flex items-center justify-center w-5 h-5 mx-0.5 rounded-sm bg-gradient-to-r from-orange-500 to-red-500">
-          {/* Target/Camera Lens Icon */}
-          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1"/>
-            <path d="M12 2v4m0 12v4m10-10h-4m-12 0H2" stroke="currentColor" strokeWidth="1" fill="none"/>
-          </svg>
-        </span>
-        le
+    <div className={`flex flex-col ${className}`}>
+      <span className="text-white font-bold text-2xl tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+        PickPoynt
+      </span>
+      <span className="text-slate-400 text-xs -mt-1">
+        Decisions made simple
       </span>
     </div>
   )
@@ -34,11 +21,11 @@ export function BlogFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <TrackScaleLogo className="h-8" />
+              <PickPoyntLogo className="h-12" />
             </div>
             <p className="text-slate-400 mb-6 max-w-md">
-              Your trusted source for honest product reviews, buying guides, and consumer insights. 
-              Make informed purchasing decisions with TrackScale's comprehensive product analysis.
+              Your trusted source for honest product reviews, buying guides, and consumer insights.
+              Make informed purchasing decisions with PickPoynt's comprehensive product analysis.
             </p>
             <div className="flex space-x-4">
               <a
@@ -70,7 +57,7 @@ export function BlogFooter() {
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="text-sm font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-3">
@@ -106,7 +93,7 @@ export function BlogFooter() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="text-sm font-semibold text-white mb-4">Resources</h3>
             <ul className="space-y-3">
@@ -133,10 +120,10 @@ export function BlogFooter() {
             </ul>
           </div>
         </div>
-        
+
         <div className="mt-8 border-t border-slate-800 pt-8">
           <p className="text-center text-slate-400">
-            © 2024 TrackScale Blog. All rights reserved.
+            © 2024 PickPoynt. All rights reserved.
           </p>
         </div>
       </div>

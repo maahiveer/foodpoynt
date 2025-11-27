@@ -24,7 +24,9 @@ CREATE TABLE articles (
   published_at TIMESTAMP WITH TIME ZONE,
   tags TEXT[] DEFAULT '{}',
   featured_image TEXT,
-  category_id UUID REFERENCES categories(id) ON DELETE SET NULL
+  category_id UUID REFERENCES categories(id) ON DELETE SET NULL,
+  left_banner TEXT,
+  right_banner TEXT
 );
 
 -- Create user profiles table (extends auth.users)

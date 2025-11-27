@@ -27,7 +27,7 @@ export function BlogHero() {
                 </span>
               </h1>
               <p className="text-lg leading-relaxed text-slate-200">
-                TrackScale curates deep-dive reviews, experimentation logs, and practical frameworks
+                PickPoynt curates deep-dive reviews, experimentation logs, and practical frameworks
                 for modern builders. Every guide is battle tested on real products, not written by AI
                 on autopilot.
               </p>
@@ -148,7 +148,7 @@ export function BlogHero() {
                 12,000+ founders, PMs, and growth leads already onboard.
               </p>
               <p className="text-[11px]">
-                By subscribing you agree to receive TrackScale updates. We respect your inbox and only
+                By subscribing you agree to receive PickPoynt updates. We respect your inbox and only
                 send value.
               </p>
             </div>
@@ -158,4 +158,3 @@ export function BlogHero() {
     </section>
   )
 }
-

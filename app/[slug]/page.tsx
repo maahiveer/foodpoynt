@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps) {
   const { slug } = await params
-  
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
+
   // Reject reserved paths
   const reservedPaths = ['', 'about', 'contact', 'privacy', 'terms', 'admin', 'articles', 'preview']
   if (!slug || reservedPaths.includes(slug)) {
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
       title: 'Article Not Found',
     }
   }
-  
+
   // Check if Supabase is configured
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === 'https://placeholder.supabase.co') {
     return {
@@ -54,40 +55,73 @@ export async function generateMetadata({ params }: ArticlePageProps) {
     const titleMatch = article.content.match(/<title[^>]*>(.*?)<\/title>/i)
     const h1Match = article.content.match(/<h1[^>]*>(.*?)<\/h1>/i)
     const h2Match = article.content.match(/<h2[^>]*>(.*?)<\/h2>/i)
-    
+
     // Clean HTML tags from extracted title
     const cleanTitle = (title: string) => title.replace(/<[^>]*>/g, '').trim()
-    
-    const extractedTitle = 
+
+    const extractedTitle =
       (titleMatch?.[1] && cleanTitle(titleMatch[1])) ||
       (h1Match?.[1] && cleanTitle(h1Match[1])) ||
       (h2Match?.[1] && cleanTitle(h2Match[1])) ||
       article.title ||
       'Untitled Article'
-    
+
     // Clean HTML tags from content for description
     const cleanContent = article.content.replace(/<[^>]*>/g, '').substring(0, 160)
     const description = article.excerpt || cleanContent
+    const articleUrl = `${siteUrl}/${article.slug}`;
 
     return {
       title: extractedTitle,
       description: description,
       keywords: article.tags?.join(', ') || '',
+      authors: [{ name: article.user_profiles?.full_name || 'TrackScale Author' }],
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
       openGraph: {
         title: extractedTitle,
         description: description,
+        url: articleUrl,
+        siteName: 'TrackScale Blog',
         type: 'article',
         publishedTime: article.published_at,
-        authors: ['TrackScale'],
+        modifiedTime: article.updated_at,
+        authors: [article.user_profiles?.full_name || 'TrackScale Author'],
         tags: article.tags || [],
+        images: article.featured_image ? [
+          {
+            url: article.featured_image,
+            width: 1200,
+            height: 630,
+            alt: extractedTitle,
+          }
+        ] : [
+          {
+            url: '/og-image.png',
+            width: 1200,
+            height: 630,
+            alt: extractedTitle,
+          }
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: extractedTitle,
         description: description,
+        images: article.featured_image ? [article.featured_image] : ['/og-image.png'],
+        creator: '@trackscale',
       },
       alternates: {
-        canonical: `/${article.slug}`,
+        canonical: articleUrl,
       },
     }
   } catch (error) {
@@ -99,13 +133,13 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params
-  
+
   // Reject reserved paths that should not be handled by this route
   const reservedPaths = ['', 'about', 'contact', 'privacy', 'terms', 'admin', 'articles', 'preview']
   if (!slug || reservedPaths.includes(slug)) {
     notFound()
   }
-  
+
   // Check if Supabase is configured
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === 'https://placeholder.supabase.co') {
     notFound()
@@ -145,10 +179,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const titleMatch = article.content.match(/<title[^>]*>(.*?)<\/title>/i)
     const h1Match = article.content.match(/<h1[^>]*>(.*?)<\/h1>/i)
     const h2Match = article.content.match(/<h2[^>]*>(.*?)<\/h2>/i)
-    
+
     const cleanTitle = (title: string) => title.replace(/<[^>]*>/g, '').trim()
-    
-    const extractedTitle = 
+
+    const extractedTitle =
       (titleMatch?.[1] && cleanTitle(titleMatch[1])) ||
       (h1Match?.[1] && cleanTitle(h1Match[1])) ||
       (h2Match?.[1] && cleanTitle(h2Match[1])) ||
@@ -156,12 +190,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       'Untitled Article'
 
     // Generate structured data for SEO
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": extractedTitle,
       "description": article.excerpt || article.content.replace(/<[^>]*>/g, '').substring(0, 160),
-      "image": article.featured_image || undefined,
+      "image": article.featured_image || `${siteUrl}/og-image.png`,
       "author": {
         "@type": "Person",
         "name": article.user_profiles?.full_name || "TrackScale Author"
@@ -171,14 +206,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         "name": "TrackScale Blog",
         "logo": {
           "@type": "ImageObject",
-          "url": "/logo.png"
+          "url": `${siteUrl}/logo.png`
         }
       },
       "datePublished": article.published_at || article.created_at,
       "dateModified": article.updated_at,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `/${article.slug}`
+        "@id": `${siteUrl}/${article.slug}`
       },
       "keywords": article.tags?.join(', ') || '',
       "articleSection": article.tags?.[0] || 'General',
@@ -192,7 +227,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        
+
         {/* Remove hash from URL and add sidebar functionality */}
         <script
           dangerouslySetInnerHTML={{
@@ -239,15 +274,47 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             `
           }}
         />
-        
-        {/* Simple article container without extra header chrome */}
-        <main className="py-8">
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-              <div className="article-content">
-                <div dangerouslySetInnerHTML={{ __html: article.content }} />
-              </div>
-            </article>
+
+        {/* Article content with banners */}
+        <main className="min-h-screen w-full">
+          <div className="flex gap-6 max-w-[1920px] mx-auto px-4 py-8">
+            {/* Left Banner - 9:16 ratio */}
+            {article.left_banner && (
+              <aside className="hidden xl:block w-64 flex-shrink-0 sticky top-8 self-start">
+                <div
+                  className="aspect-[9/16] w-full overflow-hidden rounded-lg shadow-lg"
+                  dangerouslySetInnerHTML={{ __html: article.left_banner }}
+                />
+              </aside>
+            )}
+
+            {/* Main Article Content */}
+            <div className="flex-1 min-w-0 max-w-4xl mx-auto">
+              {article.content.trim().startsWith('<!DOCTYPE') || article.content.trim().startsWith('<html') ? (
+                // Complete HTML document - render in iframe
+                <iframe
+                  srcDoc={article.content}
+                  className="w-full min-h-screen border-0"
+                  style={{ height: '100vh', width: '100%' }}
+                  title="Article Content"
+                />
+              ) : (
+                // Partial HTML - render normally
+                <div className="article-content">
+                  <div dangerouslySetInnerHTML={{ __html: article.content }} />
+                </div>
+              )}
+            </div>
+
+            {/* Right Banner - 9:16 ratio */}
+            {article.right_banner && (
+              <aside className="hidden xl:block w-64 flex-shrink-0 sticky top-8 self-start">
+                <div
+                  className="aspect-[9/16] w-full overflow-hidden rounded-lg shadow-lg"
+                  dangerouslySetInnerHTML={{ __html: article.right_banner }}
+                />
+              </aside>
+            )}
           </div>
         </main>
       </div>

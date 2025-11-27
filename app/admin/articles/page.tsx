@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { supabase, Article } from '@/lib/supabase'
 import Link from 'next/link'
-import { 
-  FileText, 
-  Eye, 
-  Edit, 
-  Trash2, 
-  Plus, 
+import {
+  FileText,
+  Eye,
+  Edit,
+  Trash2,
+  Plus,
   Calendar,
   ArrowLeft
 } from 'lucide-react'
@@ -154,7 +154,7 @@ export default function AdminArticlesPage() {
                   </div>
                 </div>
               ) : (
-                <div className="overflow-hidden">
+                <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
                     <thead className="bg-slate-50 dark:bg-slate-700">
                       <tr>
@@ -193,11 +193,10 @@ export default function AdminArticlesPage() {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                              article.status === 'published'
-                                ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300'
-                                : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
-                            }`}>
+                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${article.status === 'published'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300'
+                              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
+                              }`}>
                               {article.status}
                             </span>
                           </td>
@@ -208,29 +207,26 @@ export default function AdminArticlesPage() {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <div className="flex items-center space-x-3">
+                            <div className="flex items-center justify-end gap-2">
                               {article.status === 'published' && (
                                 <Link
                                   href={`/${article.slug}`}
-                                  className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
-                                  title="View Article"
+                                  className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs font-medium"
                                 >
-                                  <Eye className="h-4 w-4" />
+                                  View
                                 </Link>
                               )}
                               <Link
                                 href={`/admin/articles/${article.id}/edit`}
-                                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
-                                title="Edit Article"
+                                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs font-medium"
                               >
-                                <Edit className="h-4 w-4" />
+                                Edit
                               </Link>
                               <button
                                 onClick={() => deleteArticle(article.id)}
-                                className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                                title="Delete Article"
+                                className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs font-medium"
                               >
-                                <Trash2 className="h-4 w-4" />
+                                Delete
                               </button>
                             </div>
                           </td>

@@ -1,10 +1,15 @@
 import Link from 'next/link'
 import { supabase, Article } from '@/lib/supabase'
-import { Calendar, Clock } from 'lucide-react'
+import { Calendar, Clock, FolderOpen } from 'lucide-react'
 
 type ArticleRecord = Article & {
   tags?: string[]
   featured_image?: string | null
+  category?: {
+    id: string
+    name: string
+    slug: string
+  } | null
 }
 
 async function fetchPublishedArticles(limit = 10): Promise<ArticleRecord[]> {
@@ -18,7 +23,10 @@ async function fetchPublishedArticles(limit = 10): Promise<ArticleRecord[]> {
 
   const { data, error } = await supabase
     .from('articles')
-    .select('*')
+    .select(`
+      *,
+      category:categories(id, name, slug)
+    `)
     .eq('status', 'published')
     .order('published_at', { ascending: false, nullsFirst: false })
     .order('created_at', { ascending: false })
@@ -111,18 +119,25 @@ export async function ArticleList() {
                       {article.excerpt || article.content.replace(/<[^>]*>/g, '').substring(0, 200) + '...'}
                     </p>
 
-                    {article.tags && article.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {article.tags.slice(0, 2).map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-900/20 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {article.category && (
+                        <Link
+                          href={`/categories/${article.category.slug}`}
+                          className="inline-flex items-center rounded-full bg-purple-50 dark:bg-purple-900/20 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
+                        >
+                          <FolderOpen className="h-3 w-3 mr-1" />
+                          {article.category.name}
+                        </Link>
+                      )}
+                      {article.tags && article.tags.length > 0 && article.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-900/20 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
                     <div className="flex items-center">
                       <Link

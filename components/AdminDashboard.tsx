@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 import { supabase, Article } from '@/lib/supabase'
 import Link from 'next/link'
-import { 
-  FileText, 
-  Eye, 
-  Edit, 
-  Trash2, 
-  Plus, 
+import {
+  FileText,
+  Eye,
+  Edit,
+  Trash2,
+  Plus,
   Calendar,
   TrendingUp,
   Users,
@@ -34,7 +34,7 @@ export function AdminDashboard() {
         console.log('✅ Supabase connection successful:', data)
       }
     })
-    
+
     fetchArticles()
   }, [])
 
@@ -223,8 +223,8 @@ export function AdminDashboard() {
                     {articles.filter((article: any) => {
                       const articleDate = new Date(article.created_at)
                       const now = new Date()
-                      return articleDate.getMonth() === now.getMonth() && 
-                             articleDate.getFullYear() === now.getFullYear()
+                      return articleDate.getMonth() === now.getMonth() &&
+                        articleDate.getFullYear() === now.getFullYear()
                     }).length}
                   </dd>
                 </dl>
@@ -240,7 +240,7 @@ export function AdminDashboard() {
           <h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-slate-100 mb-4">
             Recent Articles
           </h3>
-          
+
           {articles.length === 0 ? (
             <div className="text-center py-8">
               <FileText className="mx-auto h-12 w-12 text-slate-400" />
@@ -298,11 +298,10 @@ export function AdminDashboard() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          article.status === 'published'
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300'
-                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
-                        }`}>
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${article.status === 'published'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300'
+                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300'
+                          }`}>
                           {article.status}
                         </span>
                       </td>
@@ -313,26 +312,26 @@ export function AdminDashboard() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center justify-end gap-2">
                           {article.status === 'published' && (
                             <Link
                               href={`/${article.slug}`}
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs font-medium"
                             >
-                              <Eye className="h-4 w-4" />
+                              View
                             </Link>
                           )}
                           <Link
                             href={`/admin/articles/${article.id}/edit`}
-                            className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+                            className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs font-medium"
                           >
-                            <Edit className="h-4 w-4" />
+                            Edit
                           </Link>
                           <button
                             onClick={() => deleteArticle(article.id)}
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs font-medium"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            Delete
                           </button>
                         </div>
                       </td>

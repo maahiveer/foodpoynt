@@ -14,11 +14,11 @@ console.log('Environment check:', {
 // Only create real client if we have valid URLs
 let supabase: any = null
 
-if (supabaseUrl && 
-    supabaseUrl.startsWith('https://') && 
-    supabaseUrl !== 'https://placeholder.supabase.co' && 
-    supabaseAnonKey && 
-    supabaseAnonKey !== 'placeholder-key') {
+if (supabaseUrl &&
+  supabaseUrl.startsWith('https://') &&
+  supabaseUrl !== 'https://placeholder.supabase.co' &&
+  supabaseAnonKey &&
+  supabaseAnonKey !== 'placeholder-key') {
   try {
     supabase = createClient(supabaseUrl, supabaseAnonKey)
     console.log('✅ Real Supabase client created successfully')
@@ -36,7 +36,7 @@ function createMockClient() {
   return {
     auth: {
       getSession: () => Promise.resolve({ data: { session: null }, error: null }),
-      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => { } } } }),
       signInWithPassword: () => Promise.resolve({ error: new Error('Supabase not configured') }),
       signUp: () => Promise.resolve({ error: new Error('Supabase not configured') }),
       signOut: () => Promise.resolve({ error: null }),
@@ -71,6 +71,9 @@ export interface Article {
   published_at?: string
   tags: string[]
   featured_image?: string
+  category_id?: string
+  left_banner?: string
+  right_banner?: string
 }
 
 export interface Category {
