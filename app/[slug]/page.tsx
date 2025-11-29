@@ -275,47 +275,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           }}
         />
 
-        {/* Article content with banners */}
+        {/* Article content - render complete HTML documents in iframe */}
         <main className="min-h-screen w-full">
-          <div className="flex gap-6 max-w-[1920px] mx-auto px-4 py-8">
-            {/* Left Banner - 9:16 ratio */}
-            {article.left_banner && (
-              <aside className="hidden xl:block w-64 flex-shrink-0 sticky top-8 self-start">
-                <div
-                  className="aspect-[9/16] w-full overflow-hidden rounded-lg shadow-lg"
-                  dangerouslySetInnerHTML={{ __html: article.left_banner }}
-                />
-              </aside>
-            )}
-
-            {/* Main Article Content */}
-            <div className="flex-1 min-w-0 max-w-4xl mx-auto">
-              {article.content.trim().startsWith('<!DOCTYPE') || article.content.trim().startsWith('<html') ? (
-                // Complete HTML document - render in iframe
-                <iframe
-                  srcDoc={article.content}
-                  className="w-full min-h-screen border-0"
-                  style={{ height: '100vh', width: '100%' }}
-                  title="Article Content"
-                />
-              ) : (
-                // Partial HTML - render normally
-                <div className="article-content">
-                  <div dangerouslySetInnerHTML={{ __html: article.content }} />
-                </div>
-              )}
+          {article.content.trim().startsWith('<!DOCTYPE') || article.content.trim().startsWith('<html') ? (
+            // Complete HTML document - render in iframe
+            <iframe
+              srcDoc={article.content}
+              className="w-full min-h-screen border-0"
+              style={{ height: '100vh', width: '100%' }}
+              title="Article Content"
+            />
+          ) : (
+            // Partial HTML - render normally
+            <div className="article-content">
+              <div dangerouslySetInnerHTML={{ __html: article.content }} />
             </div>
-
-            {/* Right Banner - 9:16 ratio */}
-            {article.right_banner && (
-              <aside className="hidden xl:block w-64 flex-shrink-0 sticky top-8 self-start">
-                <div
-                  className="aspect-[9/16] w-full overflow-hidden rounded-lg shadow-lg"
-                  dangerouslySetInnerHTML={{ __html: article.right_banner }}
-                />
-              </aside>
-            )}
-          </div>
+          )}
         </main>
       </div>
     )
