@@ -72,8 +72,6 @@ export interface Article {
   tags: string[]
   featured_image?: string
   category_id?: string
-  left_banner?: string
-  right_banner?: string
 }
 
 export interface Category {

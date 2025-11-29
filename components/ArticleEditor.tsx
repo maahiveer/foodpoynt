@@ -34,8 +34,6 @@ export function ArticleEditor({ article }: ArticleEditorProps) {
   const [featuredImage, setFeaturedImage] = useState(article?.featured_image || '')
   const [categoryId, setCategoryId] = useState(article?.category_id || '')
   const [categories, setCategories] = useState<Category[]>([])
-  const [leftBanner, setLeftBanner] = useState(article?.left_banner || '')
-  const [rightBanner, setRightBanner] = useState(article?.right_banner || '')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -123,8 +121,6 @@ export function ArticleEditor({ article }: ArticleEditorProps) {
         featured_image: featuredImage.trim() || null,
         category_id: categoryId || null,
         published_at: publishStatus === 'published' ? new Date().toISOString() : null,
-        left_banner: leftBanner.trim() || null,
-        right_banner: rightBanner.trim() || null,
       }
 
       console.log('Saving article:', articleData)
@@ -369,42 +365,6 @@ export function ArticleEditor({ article }: ArticleEditorProps) {
               className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               placeholder="Type a tag and press Enter"
             />
-          </div>
-
-          {/* Left Banner */}
-          <div>
-            <label htmlFor="left-banner" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Left Banner (9:16 ratio)
-            </label>
-            <textarea
-              id="left-banner"
-              rows={4}
-              value={leftBanner}
-              onChange={(e) => setLeftBanner(e.target.value)}
-              className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors font-mono text-sm"
-              placeholder='HTML code or image: <a href="URL"><img src="banner.jpg" alt="Ad" /></a>'
-            />
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Enter HTML code for banner (e.g., affiliate ad script or image with link). Recommended 9:16 aspect ratio.
-            </p>
-          </div>
-
-          {/* Right Banner */}
-          <div>
-            <label htmlFor="right-banner" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Right Banner (9:16 ratio)
-            </label>
-            <textarea
-              id="right-banner"
-              rows={4}
-              value={rightBanner}
-              onChange={(e) => setRightBanner(e.target.value)}
-              className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors font-mono text-sm"
-              placeholder='HTML code or image: <a href="URL"><img src="banner.jpg" alt="Ad" /></a>'
-            />
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Enter HTML code for banner (e.g., affiliate ad script or image with link). Recommended 9:16 aspect ratio.
-            </p>
           </div>
 
           {/* Content */}
