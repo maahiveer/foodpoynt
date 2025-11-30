@@ -20,7 +20,8 @@ export function CategoryManager() {
     const [formData, setFormData] = useState({
         name: '',
         slug: '',
-        description: ''
+        description: '',
+        parent_id: ''
     })
     const [articleCounts, setArticleCounts] = useState<Record<string, number>>({})
 
@@ -73,12 +74,13 @@ export function CategoryManager() {
                 .insert({
                     name: formData.name.trim(),
                     slug: formData.slug.trim(),
-                    description: formData.description.trim() || null
+                    description: formData.description.trim() || null,
+                    parent_id: formData.parent_id || null
                 })
 
             if (error) throw error
 
-            setFormData({ name: '', slug: '', description: '' })
+            setFormData({ name: '', slug: '', description: '', parent_id: '' })
             setShowNewForm(false)
             fetchCategories()
         } catch (error: any) {
@@ -99,14 +101,15 @@ export function CategoryManager() {
                 .update({
                     name: formData.name.trim(),
                     slug: formData.slug.trim(),
-                    description: formData.description.trim() || null
+                    description: formData.description.trim() || null,
+                    parent_id: formData.parent_id || null
                 })
                 .eq('id', id)
 
             if (error) throw error
 
             setEditingId(null)
-            setFormData({ name: '', slug: '', description: '' })
+            setFormData({ name: '', slug: '', description: '', parent_id: '' })
             fetchCategories()
         } catch (error: any) {
             console.error('Error updating category:', error)
@@ -142,7 +145,8 @@ export function CategoryManager() {
         setFormData({
             name: category.name,
             slug: category.slug,
-            description: category.description || ''
+            description: category.description || '',
+            parent_id: category.parent_id || ''
         })
         setShowNewForm(false)
     }
@@ -150,7 +154,7 @@ export function CategoryManager() {
     const cancelEdit = () => {
         setEditingId(null)
         setShowNewForm(false)
-        setFormData({ name: '', slug: '', description: '' })
+        setFormData({ name: '', slug: '', description: '', parent_id: '' })
     }
 
     const generateSlug = (name: string) => {
@@ -193,7 +197,7 @@ export function CategoryManager() {
                     onClick={() => {
                         setShowNewForm(true)
                         setEditingId(null)
-                        setFormData({ name: '', slug: '', description: '' })
+                        setFormData({ name: '', slug: '', description: '', parent_id: '' })
                     }}
                     className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors"
                 >
@@ -232,6 +236,24 @@ export function CategoryManager() {
                                 className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="technology"
                             />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                                Parent Category (Optional)
+                            </label>
+                            <select
+                                value={formData.parent_id}
+                                onChange={(e) => setFormData({ ...formData, parent_id: e.target.value })}
+                                className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                <option value="">None (Top Level Category)</option>
+                                {categories.filter(c => !c.parent_id).map((category) => (
+                                    <option key={category.id} value={category.id}>{category.name}</option>
+                                ))}
+                            </select>
+                            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                Leave as "None" to create a parent category, or select a parent to create a subcategory
+                            </p>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -325,6 +347,21 @@ export function CategoryManager() {
                                                                         className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                                     />
                                                                 </div>
+                                                            </div>
+                                                            <div>
+                                                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                                                                    Parent Category
+                                                                </label>
+                                                                <select
+                                                                    value={formData.parent_id}
+                                                                    onChange={(e) => setFormData({ ...formData, parent_id: e.target.value })}
+                                                                    className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                                >
+                                                                    <option value="">None (Top Level)</option>
+                                                                    {categories.filter(c => !c.parent_id && c.id !== category.id).map((cat) => (
+                                                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                                                    ))}
+                                                                </select>
                                                             </div>
                                                             <div>
                                                                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
