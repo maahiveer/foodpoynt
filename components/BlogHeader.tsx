@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ChevronDown } from 'lucide-react'
 
 // PickPoynt Logo Component
 function PickPoyntLogo({ className = "h-8" }: { className?: string }) {
@@ -18,6 +19,7 @@ interface Category {
   id: string
   name: string
   slug: string
+  parent_id?: string | null
 }
 
 interface BlogHeaderProps {
@@ -25,6 +27,10 @@ interface BlogHeaderProps {
 }
 
 export function BlogHeader({ categories }: BlogHeaderProps) {
+  // Group categories into hierarchy
+  const topLevelCategories = categories.filter(c => !c.parent_id)
+  const getSubcategories = (parentId: string) => categories.filter(c => c.parent_id === parentId)
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/80 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-900/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,16 +47,50 @@ export function BlogHeader({ categories }: BlogHeaderProps) {
               Home
             </Link>
 
-            {/* Dynamic Category Links */}
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                href={`/categories/${category.slug}`}
-                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
-              >
-                {category.name}
-              </Link>
-            ))}
+            {/* Dynamic Category Links with Dropdowns */}
+            {topLevelCategories.map((category) => {
+              const subcategories = getSubcategories(category.id)
+              const hasSubcategories = subcategories.length > 0
+
+              if (hasSubcategories) {
+                return (
+                  <div key={category.id} className="relative group">
+                    <button className="flex items-center text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors">
+                      <Link href={`/categories/${category.slug}`}>
+                        {category.name}
+                      </Link>
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left">
+                      <div className="py-1" role="menu" aria-orientation="vertical">
+                        {subcategories.map((sub) => (
+                          <Link
+                            key={sub.id}
+                            href={`/categories/${sub.slug}`}
+                            className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                            role="menuitem"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+
+              return (
+                <Link
+                  key={category.id}
+                  href={`/categories/${category.slug}`}
+                  className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
+                >
+                  {category.name}
+                </Link>
+              )
+            })}
 
             <Link
               href="/about"

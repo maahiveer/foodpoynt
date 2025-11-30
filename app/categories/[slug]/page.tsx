@@ -55,7 +55,7 @@ async function getCategories() {
     try {
         const { data, error } = await supabase
             .from('categories')
-            .select('id, name, slug')
+            .select('id, name, slug, parent_id')
             .order('name', { ascending: true })
 
         if (error) {

@@ -22,7 +22,7 @@ export default function PreviewPage() {
     try {
       const { data } = await supabase
         .from('categories')
-        .select('id, name, slug')
+        .select('id, name, slug, parent_id')
         .order('name', { ascending: true })
 
       if (data) {
