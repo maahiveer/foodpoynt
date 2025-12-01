@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
 const ARTICLES_PER_PAGE = 10;
 
 export const metadata: Metadata = {
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "TrackScale Blog - Track Your Success at Scale",
-    description: "Discover insights, tips, and strategies to track and scale your success. Expert articles on productivity, analytics, and growth.",
+    title: "PickPoynt - Decisions made simple",
+    description: "Make informed purchasing decisions with PickPoynt's comprehensive product reviews, buying guides, and consumer insights.",
     url: siteUrl,
     siteName: "PickPoynt",
     type: "website",
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "TrackScale Blog - Track Your Success at Scale",
-    description: "Discover insights, tips, and strategies to track and scale your success.",
+    title: "PickPoynt - Decisions made simple",
+    description: "Make informed purchasing decisions with PickPoynt's comprehensive product reviews, buying guides, and consumer insights.",
     images: ['/og-image.png'],
   },
 };

@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps) {
   const { slug } = await params
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
 
   // Reject reserved paths
   const reservedPaths = ['', 'about', 'contact', 'privacy', 'terms', 'admin', 'articles', 'preview']
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
       title: extractedTitle,
       description: description,
       keywords: article.tags?.join(', ') || '',
-      authors: [{ name: article.user_profiles?.full_name || 'TrackScale Author' }],
+      authors: [{ name: article.user_profiles?.full_name || 'PickPoynt Author' }],
       robots: {
         index: true,
         follow: true,
@@ -91,11 +91,11 @@ export async function generateMetadata({ params }: ArticlePageProps) {
         title: extractedTitle,
         description: description,
         url: articleUrl,
-        siteName: 'TrackScale Blog',
+        siteName: 'PickPoynt',
         type: 'article',
         publishedTime: article.published_at,
         modifiedTime: article.updated_at,
-        authors: [article.user_profiles?.full_name || 'TrackScale Author'],
+        authors: [article.user_profiles?.full_name || 'PickPoynt Author'],
         tags: article.tags || [],
         images: article.featured_image ? [
           {
@@ -118,7 +118,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
         title: extractedTitle,
         description: description,
         images: article.featured_image ? [article.featured_image] : ['/og-image.png'],
-        creator: '@trackscale',
+        creator: '@pickpoynt',
       },
       alternates: {
         canonical: articleUrl,
@@ -190,7 +190,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       'Untitled Article'
 
     // Generate structured data for SEO
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -199,11 +199,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "image": article.featured_image || `${siteUrl}/og-image.png`,
       "author": {
         "@type": "Person",
-        "name": article.user_profiles?.full_name || "TrackScale Author"
+        "name": article.user_profiles?.full_name || "PickPoynt Author"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "TrackScale Blog",
+        "name": "PickPoynt",
         "logo": {
           "@type": "ImageObject",
           "url": `${siteUrl}/logo.png`

@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tracksatscale.vercel.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | PickPoynt"
   },
   description: "Make informed purchasing decisions with PickPoynt's comprehensive product reviews, buying guides, and consumer insights. Decisions made simple.",
-  keywords: ["tracking", "analytics", "productivity", "growth", "scaling", "business", "insights"],
+  keywords: ["product reviews", "buying guides", "tech reviews", "consumer insights", "software reviews", "best tools", "comparisons"],
   authors: [{ name: "PickPoynt Team" }],
   creator: "PickPoynt",
   publisher: "PickPoynt",
@@ -55,13 +55,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TrackScale Blog - Track Your Success at Scale',
-    description: 'Discover insights, tips, and strategies to track and scale your success.',
+    title: 'PickPoynt - Decisions made simple',
+    description: 'Make informed purchasing decisions with PickPoynt\'s comprehensive product reviews and buying guides.',
     images: ['/og-image.png'],
-    creator: '@trackscale',
+    creator: '@pickpoynt',
   },
   verification: {
     google: "IH5cbk_KMXHppDi6kniuT3Q_zQdvrIVEBW_qWkyDPWw",
+  },
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
