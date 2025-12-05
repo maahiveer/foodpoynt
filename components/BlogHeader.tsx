@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { useState } from 'react'
 
 // PickPoynt Logo Component
 function PickPoyntLogo({ className = "h-8" }: { className?: string }) {
@@ -27,6 +30,8 @@ interface BlogHeaderProps {
 }
 
 export function BlogHeader({ categories }: BlogHeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   // Group categories into hierarchy
   const topLevelCategories = categories.filter(c => !c.parent_id)
   const getSubcategories = (parentId: string) => categories.filter(c => c.parent_id === parentId)
@@ -39,6 +44,7 @@ export function BlogHeader({ categories }: BlogHeaderProps) {
             <PickPoyntLogo className="h-12" />
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
@@ -106,7 +112,77 @@ export function BlogHeader({ categories }: BlogHeaderProps) {
             </Link>
           </nav>
 
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-slate-200 dark:border-slate-700">
+            <nav className="flex flex-col space-y-3">
+              <Link
+                href="/"
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors px-2 py-1"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+
+              {/* Mobile Category Links */}
+              {topLevelCategories.map((category) => {
+                const subcategories = getSubcategories(category.id)
+                const hasSubcategories = subcategories.length > 0
+
+                return (
+                  <div key={category.id} className="space-y-2">
+                    <Link
+                      href={`/categories/${category.slug}`}
+                      className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors px-2 py-1 block"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {category.name}
+                    </Link>
+                    {hasSubcategories && (
+                      <div className="pl-4 space-y-2">
+                        {subcategories.map((sub) => (
+                          <Link
+                            key={sub.id}
+                            href={`/categories/${sub.slug}`}
+                            className="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300 transition-colors px-2 py-1 block"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+
+              <Link
+                href="/about"
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors px-2 py-1"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors px-2 py-1"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   )

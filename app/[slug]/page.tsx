@@ -279,12 +279,75 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <main className="min-h-screen w-full">
           {article.content.trim().startsWith('<!DOCTYPE') || article.content.trim().startsWith('<html') ? (
             // Complete HTML document - render in iframe
-            <iframe
-              srcDoc={article.content}
-              className="w-full min-h-screen border-0"
-              style={{ height: '100vh', width: '100%' }}
-              title="Article Content"
-            />
+            <>
+              <iframe
+                srcDoc={
+                  // Inject mobile viewport meta tag if not present
+                  article.content.includes('viewport') 
+                    ? article.content
+                    : article.content.replace(
+                        /<head>/i,
+                        '<head>\n<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">'
+                      )
+                }
+                className="w-full border-0"
+                style={{ 
+                  height: '100vh', 
+                  width: '100%',
+                  minHeight: '100vh'
+                }}
+                title="Article Content"
+                loading="eager"
+                onLoad={(e) => {
+                  // Auto-resize iframe to content height
+                  const iframe = e.target as HTMLIFrameElement;
+                  if (iframe.contentWindow) {
+                    try {
+                      const resizeIframe = () => {
+                        const body = iframe.contentWindow?.document.body;
+                        const html = iframe.contentWindow?.document.documentElement;
+                        if (body && html) {
+                          const height = Math.max(
+                            body.scrollHeight,
+                            body.offsetHeight,
+                            html.clientHeight,
+                            html.scrollHeight,
+                            html.offsetHeight
+                          );
+                          iframe.style.height = height + 'px';
+                        }
+                      };
+                      
+                      // Initial resize
+                      resizeIframe();
+                      
+                      // Resize on window resize
+                      iframe.contentWindow.addEventListener('resize', resizeIframe);
+                      
+                      // Resize after images load
+                      const images = iframe.contentWindow.document.querySelectorAll('img');
+                      images.forEach((img) => {
+                        img.addEventListener('load', resizeIframe);
+                      });
+                    } catch (err) {
+                      // Cross-origin errors are expected and safe to ignore
+                      console.log('Iframe resize not available');
+                    }
+                  }
+                }}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    // Performance optimization: preconnect to common domains
+                    const link = document.createElement('link');
+                    link.rel = 'preconnect';
+                    link.href = 'https://www.youtube.com';
+                    document.head.appendChild(link);
+                  `
+                }}
+              />
+            </>
           ) : (
             // Partial HTML - render normally
             <div className="article-content">

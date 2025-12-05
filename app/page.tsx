@@ -173,7 +173,7 @@ export default async function Home({
         <BlogHero />
 
         {/* Homepage Content with Banners */}
-        <div className="flex gap-6 max-w-[1920px] mx-auto px-4">
+        <div className="flex gap-4 lg:gap-6 max-w-[1920px] mx-auto px-3 sm:px-4 lg:px-6">
           {/* Left Banner */}
           {leftBanner && (
             <aside className="hidden xl:block w-64 flex-shrink-0 sticky top-8 self-start">

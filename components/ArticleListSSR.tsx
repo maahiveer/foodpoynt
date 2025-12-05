@@ -64,9 +64,9 @@ export function ArticleListSSR({ articles, currentPage, totalPages, totalArticle
                                     key={article.id}
                                     className="group relative bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
                                 >
-                                    <div className="p-6 flex gap-6">
+                                    <div className="p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6">
                                         {article.featured_image && (
-                                            <div className="w-32 h-24 flex-shrink-0">
+                                            <div className="w-full sm:w-32 h-48 sm:h-24 flex-shrink-0">
                                                 <img
                                                     src={article.featured_image}
                                                     alt={article.title}
@@ -161,8 +161,8 @@ export function ArticleListSSR({ articles, currentPage, totalPages, totalArticle
                                                     key={page}
                                                     href={`/?page=${page}`}
                                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${currentPage === page
-                                                            ? 'bg-blue-600 text-white'
-                                                            : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
+                                                        ? 'bg-blue-600 text-white'
+                                                        : 'border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
                                                         }`}
                                                 >
                                                     {page}
