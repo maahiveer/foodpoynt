@@ -279,20 +279,50 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <main className="min-h-screen w-full">
           {article.content.trim().startsWith('<!DOCTYPE') || article.content.trim().startsWith('<html') ? (
             // Complete HTML document - render in iframe
-            <iframe
-              srcDoc={
-                // Inject mobile viewport meta tag if not present
-                article.content.includes('viewport')
-                  ? article.content
-                  : article.content.replace(
-                    /<head>/i,
-                    '<head>\n<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">'
-                  )
-              }
-              className="w-full min-h-screen border-0"
-              style={{ height: '100vh', width: '100%' }}
-              title="Article Content"
-            />
+            <>
+              {/* Resource hints for faster loading */}
+              <link rel="dns-prefetch" href="https://www.youtube.com" />
+              <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
+              <link rel="dns-prefetch" href="https://i.ytimg.com" />
+
+              <iframe
+                srcDoc={
+                  // Inject mobile viewport meta tag and performance optimizations if not present
+                  article.content.includes('viewport')
+                    ? article.content
+                    : article.content.replace(
+                      /<head>/i,
+                      `<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<style>img{height:auto;max-width:100%;display:block;}iframe[src*="youtube"]{loading:lazy;}</style>`
+                    )
+                }
+                className="w-full min-h-screen border-0"
+                style={{ height: '100vh', width: '100%' }}
+                title="Article Content"
+                loading="lazy"
+              />
+
+              {/* Inject lazy loading into iframe content */}
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    (function(){
+                      const iframe=document.querySelector('iframe[title="Article Content"]');
+                      if(!iframe)return;
+                      iframe.addEventListener('load',function(){
+                        try{
+                          const doc=iframe.contentDocument||iframe.contentWindow?.document;
+                          if(!doc)return;
+                          doc.querySelectorAll('img:not([loading])').forEach(img=>img.loading='lazy');
+                          doc.querySelectorAll('iframe[src*="youtube"]').forEach(v=>v.loading='lazy');
+                        }catch(e){}
+                      });
+                    })();
+                  `
+                }}
+              />
+            </>
           ) : (
             // Partial HTML - render normally
             <div className="article-content">
