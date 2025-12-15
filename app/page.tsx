@@ -173,67 +173,59 @@ export default async function Home({
       <main>
         <BlogHero />
 
-        {/* Category Bento Grid Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4">Explore Topics</h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Dive into our comprehensive guides, reviews, and insights.
-            </p>
+        {/* Category Grid - "WordsAtScale" Style */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-50 mb-2 uppercase tracking-wide">
+              Start Exploring
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 auto-rows-[200px] grid-flow-dense">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.filter((c: any) => !c.parent_id).map((category: any, index: number) => {
-              // Bento Grid Logic: Cycle through different span patterns
-              // Pattern repeats every 10 items
-              const i = index % 10;
-              let spanClass = "col-span-1 row-span-1"; // Default
+              // First item is the "Hero" span-3
+              const isHero = index === 0;
+              const spanClass = isHero ? "md:col-span-3" : "col-span-1";
+              const heightClass = isHero ? "min-h-[350px]" : "min-h-[250px]";
 
-              if (i === 0) spanClass = "md:col-span-2 md:row-span-2"; // Big Square
-              else if (i === 1) spanClass = "md:col-span-1 md:row-span-1";
-              else if (i === 2) spanClass = "md:col-span-1 md:row-span-2"; // Tall
-              else if (i === 3) spanClass = "md:col-span-2 md:row-span-1"; // Wide
-              else if (i === 4) spanClass = "md:col-span-1 md:row-span-1";
-              else if (i === 5) spanClass = "md:col-span-1 md:row-span-1";
-              else if (i === 6) spanClass = "md:col-span-2 md:row-span-1"; // Wide
-              else if (i === 7) spanClass = "md:col-span-1 md:row-span-1";
-              else if (i === 8) spanClass = "md:col-span-1 md:row-span-1";
-              else if (i === 9) spanClass = "md:col-span-2 md:row-span-1"; // Wide
-
-              // Fallback specifically for mobile to be simple or 2-col
-              const mobileClass = "col-span-1";
-
-              // Generate a consistent random image
-              const bgImage = `https://picsum.photos/seed/${category.id}/800/600`;
+              // Image for the Hero section
+              const heroImage = "https://picsum.photos/seed/seo-academy/500/500";
 
               return (
                 <Link
                   href={`/categories/${category.slug}`}
                   key={category.id}
-                  className={`group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${mobileClass} ${spanClass}`}
+                  className={`relative flex flex-col justify-between p-8 rounded-xl bg-[#0a0f1c] border border-slate-800 hover:border-slate-700 transition-all group ${spanClass} ${heightClass}`}
                 >
-                  {/* Background Image */}
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${bgImage})` }}
-                  />
+                  <div className="flex flex-col md:flex-row h-full items-center gap-8">
+                    {/* Hero specific layout */}
+                    {isHero && (
+                      <div className="shrink-0 hidden md:block w-1/3">
+                        <div className="aspect-square rounded-lg overflow-hidden bg-slate-800 relative">
+                          <img src={heroImage} alt={category.name} className="object-cover w-full h-full opacity-90" />
+                        </div>
+                      </div>
+                    )}
 
-                  {/* Overlay Gradient - Darker at bottom for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                    <div className={`flex flex-col ${isHero ? "md:w-2/3 items-start text-left" : "w-full items-center text-center"} h-full justify-between`}>
+                      <div className="w-full">
+                        <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mb-3">
+                          {category.name}
+                        </h3>
+                        {/* Description mainly for Hero or if available */}
+                        {isHero || category.description ? (
+                          <p className="text-slate-400 text-sm sm:text-base font-medium mb-6 line-clamp-3">
+                            {category.description || "Master this topic with our comprehensive guides, expert reviews, and data-driven insights tailored for your success."}
+                          </p>
+                        ) : null}
+                      </div>
 
-                  {/* Content */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <div className="transform transition-transform duration-300 group-hover:translate-y-[-4px]">
-                      <h3 className="text-2xl font-bold text-white mb-1 shadow-black/50 drop-shadow-md">
-                        {category.name}
-                      </h3>
-                      <div className="h-0.5 w-12 bg-blue-500 rounded-full mb-2 group-hover:w-full transition-all duration-500" />
-
-                      <div className="flex items-center text-blue-200 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                        <span>Explore Category</span>
-                        <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                      <div className={`mt-auto ${isHero ? "w-auto" : "w-full"}`}>
+                        <span className="inline-block px-8 py-3 bg-[#d4f5e0] text-[#0f1f18] text-sm sm:text-base font-black rounded uppercase tracking-wide hover:bg-white transition-colors">
+                          {isHero ? "Enrol Now for FREE" : (
+                            index % 2 === 0 ? "TRY NOW!" : "LEARN NOW!"
+                          )}
+                        </span>
                       </div>
                     </div>
                   </div>
