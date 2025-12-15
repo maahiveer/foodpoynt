@@ -182,7 +182,7 @@ export default async function Home({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 auto-rows-[200px] grid-flow-dense">
             {categories.filter((c: any) => !c.parent_id).map((category: any, index: number) => {
               // Bento Grid Logic: Cycle through different span patterns
               // Pattern repeats every 10 items
@@ -210,7 +210,7 @@ export default async function Home({
                 <Link
                   href={`/categories/${category.slug}`}
                   key={category.id}
-                  className={`group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${mobileClass} ${spanClass}`}
+                  className={`group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${mobileClass} ${spanClass}`}
                 >
                   {/* Background Image */}
                   <div
