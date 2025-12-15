@@ -1,7 +1,19 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+import { BANNED_PATTERNS } from '@/lib/banned-patterns'
+
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Check if the current URL starts with any banned pattern
+  const isBanned = BANNED_PATTERNS.some(pattern => pathname.startsWith(pattern))
+
+  if (isBanned) {
+    // Return a 410 Gone status
+    return new NextResponse('Page Gone', { status: 410, statusText: 'Gone' })
+  }
+
   const response = NextResponse.next()
 
   // Block indexing on Vercel deployment URL

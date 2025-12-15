@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
+import { BANNED_PATTERNS } from '@/lib/banned-patterns'
 
 interface ArticleSitemap {
   slug: string
@@ -72,7 +73,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       if (!error && articles) {
         articlePages = (articles as ArticleSitemap[])
-          .filter((article: ArticleSitemap) => article.slug && article.slug.trim() !== '')
+          .filter((article: ArticleSitemap) => {
+            if (!article.slug || article.slug.trim() === '') return false
+            const path = `/${article.slug}`
+            return !BANNED_PATTERNS.some(pattern => path.startsWith(pattern))
+          })
           .map((article: ArticleSitemap) => ({
             url: `${baseUrl}/${article.slug}`,
             lastModified: article.updated_at
@@ -103,12 +108,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         .order('name', { ascending: true })
 
       if (!error && categories) {
-        categoryPages = categories.map((category: any) => ({
-          url: `${baseUrl}/categories/${category.slug}`,
-          lastModified: new Date(category.created_at),
-          changeFrequency: 'weekly' as const,
-          priority: 0.8,
-        }))
+        categoryPages = categories
+          .filter((category: any) => {
+            const path = `/categories/${category.slug}`
+            return !BANNED_PATTERNS.some(pattern => path.startsWith(pattern))
+          })
+          .map((category: any) => ({
+            url: `${baseUrl}/categories/${category.slug}`,
+            lastModified: new Date(category.created_at),
+            changeFrequency: 'weekly' as const,
+            priority: 0.8,
+          }))
       }
     }
   } catch (error) {
