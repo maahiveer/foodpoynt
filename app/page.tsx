@@ -224,8 +224,8 @@ export default async function Home({
                   key={category.id}
                   className="relative flex flex-col justify-between p-8 rounded-xl bg-[#0a0f1c] border border-slate-800 hover:border-slate-700 transition-all group min-h-[250px] hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-900/10"
                 >
-                  <div className="flex flex-col h-full items-center text-center justify-between z-10 relative">
-                    <div className="w-full">
+                  <div className="flex flex-col h-full items-center text-center z-10 relative">
+                    <div className="w-full flex-1 flex flex-col justify-center">
                       <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-3 group-hover:text-blue-400 transition-colors">
                         {category.name}
                       </h3>
@@ -236,7 +236,7 @@ export default async function Home({
                       )}
                     </div>
 
-                    <div className="w-full mt-auto">
+                    <div className="w-full mt-auto pt-4">
                       <span className="inline-block px-6 py-2.5 bg-[#d4f5e0] text-[#0f1f18] text-sm font-black rounded uppercase tracking-wide group-hover:bg-white transition-colors w-full sm:w-auto">
                         {(() => {
                           const nameLower = category.name.toLowerCase();
