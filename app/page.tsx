@@ -11,9 +11,11 @@ async function getLatestArticles(): Promise<Article[]> {
     const { data: articles, error } = await supabase
       .from('articles')
       .select('id, title, slug, excerpt, featured_image, created_at, tags')
+    const { data: articles, error } = await supabase
+      .from('articles')
+      .select('id, title, slug, excerpt, featured_image, created_at, tags')
       .eq('status', 'published')
       .order('created_at', { ascending: false })
-      .limit(6)
 
     if (error) {
       console.error('Error fetching articles:', error)
@@ -53,14 +55,7 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-6 pt-12 pb-20 md:pt-20 md:pb-32 relative z-10 flex flex-col items-center text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-purple-300 mb-8 backdrop-blur-sm">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-          </span>
-          The Future of Reviews
-        </div>
+      <div className="container mx-auto px-6 pt-12 pb-12 md:pt-20 md:pb-16 relative z-10 flex flex-col items-center text-center">
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
           Decisions made <br className="hidden md:block" />
@@ -162,40 +157,6 @@ export default async function Home() {
         )}
       </section>
 
-      {/* Feature Grid (Compact) */}
-      <section className="container mx-auto px-6 py-20 border-t border-white/5">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
-            <div className="p-3 rounded-lg bg-yellow-500/10 text-yellow-500">
-              <Star className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-1">Expert Analysis</h3>
-              <p className="text-sm text-gray-400">Deep dives into specs and performance from industry veterans.</p>
-            </div>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
-            <div className="p-3 rounded-lg bg-cyan-500/10 text-cyan-500">
-              <Zap className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-1">Data Driven</h3>
-              <p className="text-sm text-gray-400">We test everything. Benchmarks, battery life, and durability.</p>
-            </div>
-          </div>
-
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4">
-            <div className="p-3 rounded-lg bg-pink-500/10 text-pink-500">
-              <Shield className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-1">100% Unbiased</h3>
-              <p className="text-sm text-gray-400">We purchase our own review units. No sponsored bias.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Footer Simple */}
       <footer className="border-t border-white/5 py-12 text-center text-sm text-gray-600">
