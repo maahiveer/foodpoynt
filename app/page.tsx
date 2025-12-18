@@ -48,7 +48,7 @@ export default async function Home() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
           <Link href="/articles" className="hover:text-white transition-colors">Articles</Link>
           <Link href="/about" className="hover:text-white transition-colors">About</Link>
-          <Link href="mailto:hello@pickpoynt.com" className="hover:text-white transition-colors">Contact</Link>
+          <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
         </nav>
       </header>
 
