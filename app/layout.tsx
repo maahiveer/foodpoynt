@@ -18,17 +18,17 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "PickPoynt - Decisions made simple",
+    default: "PickPoynt - Elevate Your Game",
     template: "%s | PickPoynt"
   },
   alternates: {
     canonical: './',
   },
-  description: "Make informed purchasing decisions with PickPoynt's comprehensive product reviews, buying guides, and consumer insights.",
-  keywords: ["product reviews", "buying guides", "tech reviews", "consumer insights"],
-  authors: [{ name: "PickPoynt Team" }],
-  creator: "PickPoynt",
-  publisher: "PickPoynt",
+  description: "Your go-to source for Pickleball insights, gear guides, and court-side stories. Honest advice for players, by players.",
+  keywords: ["pickleball", "pickleball gear", "sports", "blog"],
+  authors: [{ name: "Manish Kumar Jain" }],
+  creator: "Manish Kumar Jain",
+  publisher: "Manish Kumar Jain",
   robots: {
     index: true,
     follow: true,
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName: 'PickPoynt',
-    title: 'PickPoynt - Decisions made simple',
-    description: "Make informed purchasing decisions with PickPoynt's comprehensive product reviews and buying guides.",
+    title: 'PickPoynt - Elevate Your Game',
+    description: "Your go-to source for Pickleball insights, gear guides, and court-side stories.",
     images: [
       {
         url: '/og-image.png',
