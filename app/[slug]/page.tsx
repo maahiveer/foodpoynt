@@ -252,15 +252,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </header>
 
         <main className="w-full p-0 m-0">
-        <div className="w-full p-0 m-0">
-          <article className="bg-white dark:bg-slate-800 w-full max-w-none p-0 m-0">
+          <div className="w-full p-0 m-0">
+            <article className="bg-white dark:bg-slate-800 w-full max-w-none p-0 m-0">
 
-            <div
-              className="article-content w-full prose prose-slate dark:prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: finalContent }}
-            />
-          </article>
-        </div>
+              <div
+                className="article-content w-full"
+                dangerouslySetInnerHTML={{ __html: finalContent }}
+              />
+            </article>
+          </div>
         </main>
       </div>
     )

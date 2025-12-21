@@ -94,9 +94,9 @@ export default function PreviewPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       <BlogHeader categories={categories} />
 
-      <main className="py-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
+      <main className="w-full">
+        <div className="w-full">
+          <div className="w-full">
             <div className="mb-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
               <p className="text-sm text-yellow-800 dark:text-yellow-300">
                 <strong>Preview Mode:</strong> This is how your article will look when published.
@@ -149,7 +149,7 @@ export default function PreviewPage() {
                   )}
                 </header>
 
-                <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-slate-900 dark:prose-headings:text-slate-100 prose-p:text-slate-700 dark:prose-p:text-slate-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-strong:text-slate-900 dark:prose-strong:text-slate-100 prose-code:text-slate-900 dark:prose-code:text-slate-100 prose-pre:bg-slate-100 dark:prose-pre:bg-slate-800 prose-blockquote:border-slate-300 dark:prose-blockquote:border-slate-600 prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300">
+                <div className="w-full">
                   <div dangerouslySetInnerHTML={{ __html: finalContent }} />
                 </div>
               </div>

@@ -204,7 +204,7 @@ export function ArticleEditor({ article }: ArticleEditorProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
       <div className="mb-6">
         <button
           onClick={() => router.back()}
