@@ -233,27 +233,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         />
 
 
-        {/* Standard Header for Navigation */}
-        <header className="sticky top-0 z-50 w-full border-b border-slate-200/60 bg-white/95 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-900/95">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <Link href="/" className="flex items-center">
-                <div className="flex flex-col">
-                  <span className="text-[#1e3a8a] font-bold text-2xl tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                    PickPoynt
-                  </span>
-                </div>
-              </Link>
-              <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100">
-                Home
-              </Link>
-            </div>
-          </div>
-        </header>
 
         <main className="w-full p-0 m-0">
           <div className="w-full p-0 m-0">
-            <article className="bg-white dark:bg-slate-800 w-full max-w-none p-0 m-0">
+            <article className="w-full max-w-none p-0 m-0">
 
               <div
                 className="article-content w-full"
