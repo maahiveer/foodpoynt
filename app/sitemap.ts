@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
-import { BANNED_PATTERNS } from '@/lib/banned-patterns'
+import { BANNED_PATTERNS, isDeleted } from '@/lib/banned-patterns'
 
 interface ArticleSitemap {
   slug: string
@@ -76,7 +76,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           .filter((article: ArticleSitemap) => {
             if (!article.slug || article.slug.trim() === '') return false
             const path = `/${article.slug}`
-            return !BANNED_PATTERNS.some(pattern => path.startsWith(pattern))
+            // Exclude articles that match banned patterns OR are in the deleted list
+            return !BANNED_PATTERNS.some(pattern => path.startsWith(pattern)) && !isDeleted(path)
           })
           .map((article: ArticleSitemap) => ({
             url: `${baseUrl}/${article.slug}`,

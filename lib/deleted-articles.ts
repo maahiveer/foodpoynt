@@ -4,15 +4,13 @@
  * This is a tombstone list of permanently deleted article slugs.
  * Articles in this list will return HTTP 410 (Gone) status.
  * 
+ * Auto-generated on: 2025-12-26T10:19:16.233Z
+ * Total deleted articles: 0
+ * 
  * Why 410 instead of 404?
  * - Tells Google the content is PERMANENTLY gone (not just missing)
  * - Google will remove from search results faster
  * - Prevents wasted crawl budget
- * 
- * HOW TO ADD A DELETED ARTICLE:
- * 1. Add the slug (without leading slash) to the array below
- * 2. Deploy your changes
- * 3. Submit URL to Google Search Console for removal
  */
 
 export const DELETED_ARTICLE_SLUGS = [
@@ -22,9 +20,16 @@ export const DELETED_ARTICLE_SLUGS = [
     'manifesting-abundance',
     'wealth-manifestation',
     'attract-money-fast',
+    'agility-writer-review',
+    'babygrowth-review',
+    'docuask-ai-review',
+    'wispr-flow-ai',
+    'the-elon-code',
+    'blackout-protocol',
+    'davids-shield-reviews',
+    'neuro-energizer-review',
 
     // Add any other deleted article slugs here
-    // Example: 'old-article-slug',
 ] as const
 
 /**
@@ -34,6 +39,9 @@ export const BANNED_PATTERNS = [
     '/health',
     '/manifestation',
     '/supplements',
+    '/reviews', // Block all review category pages
+    '/ai-tools', // Block AI tools category
+    '/software', // Block software category
 ] as const
 
 /**
@@ -47,9 +55,9 @@ export function isDeleted(pathname: string): boolean {
         return true
     }
 
-    // Check if path contains spam keywords
-    const spamKeywords = ['billionaire', 'brainwave', 'parasite', 'manifestation']
-    if (spamKeywords.some(keyword => pathname.toLowerCase().includes(keyword))) {
+    // Check if path contains non-pickleball keywords
+    const deleteKeywords = ['billionaire', 'brainwave', 'parasite', 'manifestation', 'agility-writer', 'babygrowth']
+    if (deleteKeywords.some(keyword => pathname.toLowerCase().includes(keyword))) {
         return true
     }
 
