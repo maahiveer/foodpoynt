@@ -149,7 +149,7 @@ export default function PreviewPage() {
                   )}
                 </header>
 
-                <div className="w-full">
+                <div className="w-full article-content">
                   <div dangerouslySetInnerHTML={{ __html: finalContent }} />
                 </div>
               </div>

@@ -281,7 +281,7 @@ export function RichTextEditor({ value, onChange, placeholder = 'Write your arti
         <div className="w-full h-96 p-4 border-0 bg-white dark:bg-slate-900 overflow-auto" style={{ minHeight: '350px' }}>
           <div
             dangerouslySetInnerHTML={{ __html: value }}
-            className="w-full"
+            className="w-full article-content"
           />
         </div>
       ) : (
