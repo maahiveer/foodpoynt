@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic'
 const ARTICLES_PER_PAGE = 10
 
 export const metadata = {
-    title: 'Articles - PickPoynt',
-    description: 'Browse all articles and pickleball insights',
+    title: 'All Recipes',
+    description: 'Browse all recipes and culinary inspiration',
 }
 
 async function getCategories() {

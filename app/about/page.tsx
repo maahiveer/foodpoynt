@@ -4,8 +4,8 @@ import { Mail, Youtube, Linkedin, Twitter } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'About Manish Kumar Jain - Pickleball Enthusiast & Founder of PickPoynt',
-  description: 'Meet Manish Kumar Jain, the founder of PickPoynt. A passionate Pickleball player sharing honest reviews, tips, and insights from the local courts.',
+  title: 'About Manish Kumar Jain - Food Enthusiast & Founder of PickPoynt',
+  description: 'Meet Manish Kumar Jain, the founder of PickPoynt. A passionate home cook sharing delicious recipes, cooking tips, and culinary inspiration.',
 }
 
 async function getCategories() {
@@ -49,10 +49,10 @@ export default async function AboutPage() {
             {/* Minimal Header */}
             <div className="text-center mb-16">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
-                Passion for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Pickleball.</span>
+                Passion for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Cooking.</span>
               </h1>
               <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                Reviews, tips, and strategies born from real hours spent on the court.
+                Recipes, tips, and culinary inspiration born from real hours spent in the kitchen.
               </p>
             </div>
 
@@ -94,25 +94,25 @@ export default async function AboutPage() {
                   {/* Bio Content */}
                   <div className="prose prose-lg dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 leading-relaxed space-y-8">
                     <div>
-                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Why I Love Pickleball</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Why I Love Cooking</h3>
                       <p>
-                        Hi, I’m <strong>Manish Kumar Jain</strong>. My journey with Pickleball started on a whim, but it quickly became an obsession. There's something incredibly addictive about the "pop" of the ball, the fast-paced volleys at the kitchen line, and the community you find at the local courts.
+                        Hi, I'm <strong>Manish Kumar Jain</strong>. My journey with cooking started in my grandmother's kitchen, but it quickly became a lifelong passion. There's something incredibly satisfying about creating delicious meals, experimenting with flavors, and sharing food with loved ones.
                       </p>
                       <p>
-                        I spend my weekends (and let's be honest, quite a few weekday evenings) at the <strong>local courts</strong> here in town, managing our local league and testing out every piece of gear I can get my hands on. Whether it's analyzing the sweet spot on a new carbon fiber paddle or finding shoes that actually last on asphalt, I live for the details.
+                        I spend my weekends (and let's be honest, quite a few weekday evenings) in the <strong>kitchen</strong>, testing new recipes and perfecting old favorites. Whether it's mastering the perfect pasta sauce or discovering the secrets to fluffy pancakes, I live for the culinary details.
                       </p>
                       <p>
-                        Pickleball isn't just a sport to me; it's a lifestyle. It’s accessible, social, and ridiculously fun. But finding the right gear can be confusing. That's why I started PickPoynt—to share my on-court experiences and help you find the equipment that actually improves your game, without the marketing fluff.
+                        Cooking isn't just a hobby to me; it's a way of life. It's creative, rewarding, and brings people together. But finding reliable recipes can be challenging. That's why I started PickPoynt—to share my kitchen experiences and help you create amazing meals, without the fluff.
                       </p>
                     </div>
 
                     <div>
                       <h3 className="text-2xl font-bold text-slate-900 dark:text-white">The PickPoynt Mission</h3>
                       <p>
-                        My mission with PickPoynt is simple: to create a resource that is packed with genuine, player-tested advice. I believe that the best gear isn't always the most expensive—it's what works best for your game.
+                        My mission with PickPoynt is simple: to create a resource that is packed with genuine, kitchen-tested recipes. I believe that the best dishes aren't always the most complicated—it's what works best for your taste and lifestyle.
                       </p>
                       <p>
-                        Every review on this site comes from real-world testing. Whether I'm analyzing paddle surfaces or durability, my goal is to give you the honest information you need to make the right choice.
+                        Every recipe on this site comes from real-world testing in my kitchen. Whether I'm analyzing flavor profiles or cooking techniques, my goal is to give you the honest information you need to create delicious meals.
                       </p>
                     </div>
                   </div>

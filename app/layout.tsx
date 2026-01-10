@@ -18,14 +18,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "PickPoynt - Elevate Your Game",
+    default: "PickPoynt - Delicious Recipes & Culinary Inspiration",
     template: "%s | PickPoynt"
   },
   alternates: {
     canonical: './',
   },
-  description: "Your go-to source for Pickleball insights, gear guides, and court-side stories. Honest advice for players, by players.",
-  keywords: ["pickleball", "pickleball gear", "sports", "blog"],
+  description: "Your go-to source for delicious recipes, cooking tips, and culinary inspiration. From quick weeknight dinners to gourmet delights.",
+  keywords: ["recipes", "cooking", "food blog", "culinary", "cooking tips", "meal ideas"],
   authors: [{ name: "Manish Kumar Jain" }],
   creator: "Manish Kumar Jain",
   publisher: "Manish Kumar Jain",
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName: 'PickPoynt',
-    title: 'PickPoynt - Elevate Your Game',
-    description: "Your go-to source for Pickleball insights, gear guides, and court-side stories.",
+    title: 'PickPoynt - Delicious Recipes & Culinary Inspiration',
+    description: "Your go-to source for delicious recipes, cooking tips, and culinary inspiration.",
     images: [
       {
         url: '/og-image.png',
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PickPoynt - Decisions made simple',
-    description: 'Make informed purchasing decisions with PickPoynt\'s comprehensive product reviews and buying guides.',
+    title: 'PickPoynt - Delicious Recipes & Cooking Tips',
+    description: 'Discover amazing recipes and cooking inspiration. From quick meals to gourmet dishes, find your next favorite recipe.',
     images: ['/og-image.png'],
     creator: '@pickpoynt',
   },

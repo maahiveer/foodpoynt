@@ -56,17 +56,17 @@ export default async function Home() {
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
           Elevate your <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">game</span>.
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">cooking</span>.
         </h1>
 
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Genuine advice, gear insights, and stories from the court.
-          For players, by players.
+          Delicious recipes, cooking tips, and culinary inspiration from the kitchen.
+          For food lovers, by food lovers.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Link href="/articles" className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-            Read Latest Articles <ArrowRight className="w-4 h-4" />
+            Explore Recipes <ArrowRight className="w-4 h-4" />
           </Link>
           <Link href="/about" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur text-white font-medium transition-all flex items-center justify-center">
             Our Mission
@@ -77,7 +77,7 @@ export default async function Home() {
       {/* Latest Articles Grid */}
       <section className="container mx-auto px-6 py-20 border-t border-white/5 relative z-10">
         <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl font-bold">Latest Stories</h2>
+          <h2 className="text-3xl font-bold">Latest Recipes</h2>
           <Link href="/articles" className="text-sm text-gray-400 hover:text-white flex items-center gap-1 transition-colors">
             View all <ChevronRight className="w-4 h-4" />
           </Link>
@@ -148,8 +148,8 @@ export default async function Home() {
           </div>
         ) : (
           <div className="text-center py-20 bg-white/5 rounded-2xl border border-white/5 border-dashed">
-            <h3 className="text-xl font-medium text-gray-300 mb-2">No stories published yet</h3>
-            <p className="text-gray-500">Check back soon for our latest updates.</p>
+            <h3 className="text-xl font-medium text-gray-300 mb-2">No recipes published yet</h3>
+            <p className="text-gray-500">Check back soon for delicious recipes.</p>
           </div>
         )}
       </section>
