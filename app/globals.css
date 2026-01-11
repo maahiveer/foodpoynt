@@ -64,27 +64,24 @@
   background: #555;
 }
 
-/* Minimal Article Content Fix */
-.article-content {
-  color: #ffffff;
-}
-
-/* Fix for hidden/black text from external editors */
-.article-content [style*="color: rgb(0, 0, 0)"],
-.article-content [style*="color: #000"],
-.article-content [style*="color: black"] {
+/* Aggressive Article Text Visibility Fix */
+.article-content,
+.article-content * {
   color: #ffffff !important;
-}
-
-/* Reset backgrounds that might clash with dark theme */
-.article-content [style*="background-color: white"],
-.article-content [style*="background-color: #fff"],
-.article-content [style*="background-color: rgb(255, 255, 255)"] {
   background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Ensure images don't break layout */
+/* Re-allow images to display correctly */
 .article-content img {
   max-width: 100% !important;
   height: auto !important;
+  background-color: transparent !important;
+}
+
+/* Re-allow specific link colors if desired, but here we prioritize visibility */
+.article-content a {
+  text-decoration: underline !important;
+  color: #38bdf8 !important;
+  /* Sky 400 */
 }

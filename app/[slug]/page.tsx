@@ -227,7 +227,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const finalContent = article.content;
 
     return (
-      <div className="min-h-screen bg-transparent">
+      <div className="min-h-screen bg-[#030014] text-white">
         {/* Structured Data */}
         <script
           type="application/ld+json"
