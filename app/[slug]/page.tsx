@@ -235,10 +235,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        <main className="w-full">
-          <article className="w-full max-w-none">
+        <main className="container mx-auto px-6 py-12 md:py-20">
+          <article className="max-w-4xl mx-auto">
             <div
-              className="article-content w-full"
+              className="article-content"
               dangerouslySetInnerHTML={{ __html: finalContent }}
             />
           </article>
