@@ -89,25 +89,37 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-6 pt-12 pb-12 md:pt-20 md:pb-16 relative z-10 flex flex-col items-center text-center">
+      <div className="relative pt-12 pb-12 md:pt-20 md:pb-16 overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+          <img
+            src="/images/hero-bg.png"
+            alt="Delicious cooking background"
+            className="w-full h-full object-cover"
+            style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030014]/60 to-[#030014]" />
+        </div>
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
-          Elevate your <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">cooking</span>.
-        </h1>
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
+            Elevate your <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">cooking</span>.
+          </h1>
 
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Delicious recipes, cooking tips, and culinary inspiration from the kitchen.
-          For food lovers, by food lovers.
-        </p>
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Delicious recipes, cooking tips, and culinary inspiration from the kitchen.
+            For food lovers, by food lovers.
+          </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Link href="/articles" className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-            Explore Recipes <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link href="/about" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur text-white font-medium transition-all flex items-center justify-center">
-            Our Mission
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Link href="/articles" className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
+              Explore Recipes <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/about" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur text-white font-medium transition-all flex items-center justify-center">
+              Our Mission
+            </Link>
+          </div>
         </div>
       </div>
 
