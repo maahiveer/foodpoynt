@@ -227,23 +227,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const finalContent = article.content;
 
     return (
-      <div className="min-h-screen bg-[#030014] text-white">
-        <BlogHeader categories={[]} />
+      <div className="min-h-screen bg-transparent">
         {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        <main className="container mx-auto px-6 py-12 md:py-20">
-          <article className="max-w-4xl mx-auto">
-            <div
-              className="article-content"
-              dangerouslySetInnerHTML={{ __html: finalContent }}
-            />
-          </article>
-        </main>
-        <BlogFooter />
+        <article className="w-full m-0 p-0">
+          <div
+            className="article-content w-full m-0 p-0"
+            dangerouslySetInnerHTML={{ __html: finalContent }}
+          />
+        </article>
       </div>
     )
   } catch (error) {
