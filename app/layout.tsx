@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 
 import { CookieConsent } from "@/components/CookieConsent";
 
-import Script from "next/script";
+import { AdScripts } from "@/components/AdScripts";
 
 export default function RootLayout({
   children,
@@ -92,15 +92,7 @@ export default function RootLayout({
           <CookieConsent />
         </AuthProvider>
 
-        {/* Monetag Interstitial Ads */}
-        <Script id="monetag-interstitial" strategy="afterInteractive">
-          {`(function(s){s.dataset.zone='10327495',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
-        </Script>
-
-        {/* Monetag Inpage Push Ads */}
-        <Script id="monetag-inpage-push" strategy="afterInteractive">
-          {`(function(s){s.dataset.zone='10450838',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
-        </Script>
+        <AdScripts />
       </body>
     </html>
   );
