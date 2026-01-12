@@ -29,14 +29,18 @@ const getCategoryIcon = (name: string) => {
   const lowerName = name.toLowerCase()
   if (lowerName.includes('italian') || lowerName.includes('pizza') || lowerName.includes('pasta')) return Pizza
   if (lowerName.includes('asian') || lowerName.includes('chinese') || lowerName.includes('japanese')) return UtensilsCrossed
-  if (lowerName.includes('dessert') || lowerName.includes('sweet') || lowerName.includes('cake')) return Cake
+  if (lowerName.includes('dessert') || lowerName.includes('sweet') || lowerName.includes('cake') || lowerName.includes('bakery')) return Cake
   if (lowerName.includes('breakfast') || lowerName.includes('coffee')) return Coffee
-  if (lowerName.includes('healthy') || lowerName.includes('salad')) return Salad
+  if (lowerName.includes('healthy') || lowerName.includes('salad') || lowerName.includes('diet')) return Salad
   if (lowerName.includes('vegan') || lowerName.includes('plant')) return Leaf
   if (lowerName.includes('quick') || lowerName.includes('fast')) return UtensilsCrossed
   if (lowerName.includes('comfort') || lowerName.includes('soup')) return Soup
   if (lowerName.includes('cookie') || lowerName.includes('snack')) return Cookie
-  return FolderOpen
+
+  // High-quality random fallback icons
+  const fallbacks = [UtensilsCrossed, Soup, Salad, Pizza, Coffee, Leaf, Cake, Cookie]
+  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return fallbacks[charSum % fallbacks.length]
 }
 
 const getCategoryGradient = (name: string) => {
@@ -49,7 +53,16 @@ const getCategoryGradient = (name: string) => {
   if (lowerName.includes('vegan')) return 'from-lime-600/20 to-green-600/20 hover:border-lime-500/50'
   if (lowerName.includes('quick')) return 'from-blue-600/20 to-cyan-600/20 hover:border-blue-500/50'
   if (lowerName.includes('comfort')) return 'from-rose-600/20 to-red-600/20 hover:border-rose-500/50'
-  return 'from-slate-600/20 to-slate-800/20 hover:border-slate-500/50'
+
+  // High-quality random fallback gradients
+  const gradients = [
+    'from-indigo-600/20 to-blue-600/20 hover:border-indigo-500/50',
+    'from-violet-600/20 to-fuchsia-600/20 hover:border-violet-500/50',
+    'from-amber-600/20 to-yellow-600/20 hover:border-amber-500/50',
+    'from-emerald-600/20 to-cyan-600/20 hover:border-emerald-500/50'
+  ]
+  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return gradients[charSum % gradients.length]
 }
 
 const getIconColor = (name: string) => {
@@ -62,8 +75,13 @@ const getIconColor = (name: string) => {
   if (lowerName.includes('vegan')) return 'text-lime-400'
   if (lowerName.includes('quick')) return 'text-blue-400'
   if (lowerName.includes('comfort')) return 'text-rose-400'
-  return 'text-slate-400'
+
+  // High-quality random fallback colors
+  const colors = ['text-indigo-400', 'text-violet-400', 'text-amber-400', 'text-emerald-400', 'text-cyan-400']
+  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return colors[charSum % colors.length]
 }
+
 
 export default async function Home() {
   const categories = await getCategories()
