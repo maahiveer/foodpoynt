@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { BlogHeader } from '@/components/BlogHeader'
 import { BlogFooter } from '@/components/BlogFooter'
 import { supabase } from '@/lib/supabase'
-import { Calendar, Clock, Pizza, UtensilsCrossed, Cake, Coffee, Salad, Leaf, Soup, Cookie, FolderOpen, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, ArrowRight, FolderOpen } from 'lucide-react'
+import { getCategoryIcon, getIconColor } from '@/lib/category-utils'
 
 interface CategoryPageProps {
     params: Promise<{
@@ -16,19 +17,6 @@ export const dynamic = 'force-dynamic'
 
 const ARTICLES_PER_PAGE = 12
 
-const getCategoryIcon = (name: string) => {
-    const lowerName = name.toLowerCase()
-    if (lowerName.includes('italian') || lowerName.includes('pizza') || lowerName.includes('pasta')) return Pizza
-    if (lowerName.includes('asian') || lowerName.includes('chinese') || lowerName.includes('japanese')) return UtensilsCrossed
-    if (lowerName.includes('dessert') || lowerName.includes('sweet') || lowerName.includes('cake')) return Cake
-    if (lowerName.includes('breakfast') || lowerName.includes('coffee')) return Coffee
-    if (lowerName.includes('healthy') || lowerName.includes('salad')) return Salad
-    if (lowerName.includes('vegan') || lowerName.includes('plant')) return Leaf
-    if (lowerName.includes('quick') || lowerName.includes('fast')) return UtensilsCrossed
-    if (lowerName.includes('comfort') || lowerName.includes('soup')) return Soup
-    if (lowerName.includes('cookie') || lowerName.includes('snack')) return Cookie
-    return FolderOpen
-}
 
 export async function generateMetadata({ params }: CategoryPageProps) {
     const { slug } = await params
@@ -114,6 +102,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     const { articles, totalArticles } = await getCategoryArticles(category.id, currentPage)
     const totalPages = Math.ceil(totalArticles / ARTICLES_PER_PAGE)
     const Icon = getCategoryIcon(category.name)
+    const iconColor = getIconColor(category.name)
 
     return (
         <div className="min-h-screen bg-[#030014] text-white">
@@ -128,8 +117,10 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                 {/* Hero Section */}
                 <section className="container mx-auto px-6 py-16 md:py-24 relative z-10 text-center">
                     <div className="max-w-4xl mx-auto">
-                        <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-white/5 border border-white/10 mb-8 backdrop-blur-xl">
-                            <Icon className="w-12 h-12 text-purple-400" />
+                        <div className="relative inline-flex items-center justify-center p-4 rounded-2xl bg-white/5 border border-white/10 mb-8 backdrop-blur-xl group">
+                            {/* Decorative Glow */}
+                            <div className={`absolute -inset-4 rounded-full blur-2xl opacity-20 ${iconColor.replace('text-', 'bg-')} transition-opacity group-hover:opacity-40`} />
+                            <Icon className={`w-12 h-12 ${iconColor} relative z-10`} />
                         </div>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
                             {category.name}

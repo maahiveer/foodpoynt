@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, UtensilsCrossed, Cookie, Salad, Pizza, Coffee, Soup, Cake, Leaf, FolderOpen } from 'lucide-react'
+import { ArrowRight, ChevronRight, FolderOpen } from 'lucide-react'
 import { supabase, Category } from '@/lib/supabase'
+import { getCategoryIcon, getCategoryGradient, getIconColor } from '@/lib/category-utils'
 
 export const revalidate = 0 // Ensure fresh data on every request
 
@@ -25,62 +26,6 @@ async function getCategories(): Promise<Category[]> {
   }
 }
 
-const getCategoryIcon = (name: string) => {
-  const lowerName = name.toLowerCase()
-  if (lowerName.includes('italian') || lowerName.includes('pizza') || lowerName.includes('pasta')) return Pizza
-  if (lowerName.includes('asian') || lowerName.includes('chinese') || lowerName.includes('japanese')) return UtensilsCrossed
-  if (lowerName.includes('dessert') || lowerName.includes('sweet') || lowerName.includes('cake') || lowerName.includes('bakery')) return Cake
-  if (lowerName.includes('breakfast') || lowerName.includes('coffee')) return Coffee
-  if (lowerName.includes('healthy') || lowerName.includes('salad') || lowerName.includes('diet')) return Salad
-  if (lowerName.includes('vegan') || lowerName.includes('plant')) return Leaf
-  if (lowerName.includes('quick') || lowerName.includes('fast')) return UtensilsCrossed
-  if (lowerName.includes('comfort') || lowerName.includes('soup')) return Soup
-  if (lowerName.includes('cookie') || lowerName.includes('snack')) return Cookie
-
-  // High-quality random fallback icons
-  const fallbacks = [UtensilsCrossed, Soup, Salad, Pizza, Coffee, Leaf, Cake, Cookie]
-  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  return fallbacks[charSum % fallbacks.length]
-}
-
-const getCategoryGradient = (name: string) => {
-  const lowerName = name.toLowerCase()
-  if (lowerName.includes('italian')) return 'from-green-600/20 to-red-600/20 hover:border-green-500/50'
-  if (lowerName.includes('asian')) return 'from-orange-600/20 to-yellow-600/20 hover:border-orange-500/50'
-  if (lowerName.includes('dessert')) return 'from-pink-600/20 to-purple-600/20 hover:border-pink-500/50'
-  if (lowerName.includes('breakfast')) return 'from-amber-600/20 to-orange-600/20 hover:border-amber-500/50'
-  if (lowerName.includes('healthy')) return 'from-emerald-600/20 to-teal-600/20 hover:border-emerald-500/50'
-  if (lowerName.includes('vegan')) return 'from-lime-600/20 to-green-600/20 hover:border-lime-500/50'
-  if (lowerName.includes('quick')) return 'from-blue-600/20 to-cyan-600/20 hover:border-blue-500/50'
-  if (lowerName.includes('comfort')) return 'from-rose-600/20 to-red-600/20 hover:border-rose-500/50'
-
-  // High-quality random fallback gradients
-  const gradients = [
-    'from-indigo-600/20 to-blue-600/20 hover:border-indigo-500/50',
-    'from-violet-600/20 to-fuchsia-600/20 hover:border-violet-500/50',
-    'from-amber-600/20 to-yellow-600/20 hover:border-amber-500/50',
-    'from-emerald-600/20 to-cyan-600/20 hover:border-emerald-500/50'
-  ]
-  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  return gradients[charSum % gradients.length]
-}
-
-const getIconColor = (name: string) => {
-  const lowerName = name.toLowerCase()
-  if (lowerName.includes('italian')) return 'text-green-400'
-  if (lowerName.includes('asian')) return 'text-orange-400'
-  if (lowerName.includes('dessert')) return 'text-pink-400'
-  if (lowerName.includes('breakfast')) return 'text-amber-400'
-  if (lowerName.includes('healthy')) return 'text-emerald-400'
-  if (lowerName.includes('vegan')) return 'text-lime-400'
-  if (lowerName.includes('quick')) return 'text-blue-400'
-  if (lowerName.includes('comfort')) return 'text-rose-400'
-
-  // High-quality random fallback colors
-  const colors = ['text-indigo-400', 'text-violet-400', 'text-amber-400', 'text-emerald-400', 'text-cyan-400']
-  const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  return colors[charSum % colors.length]
-}
 
 
 export default async function Home() {
@@ -161,11 +106,15 @@ export default async function Home() {
                 <Link
                   key={category.id}
                   href={`/categories/${category.slug}`}
-                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br border border-white/10 p-6 md:p-8 transition-all hover:-translate-y-2 hover:shadow-2xl ${gradient}`}
+                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br border border-white/10 p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] ${gradient}`}
                 >
                   <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  {/* Internal Glow */}
+                  <div className="absolute -top-12 -right-12 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
+
                   <div className="relative z-10 flex flex-col items-center text-center">
-                    <Icon className={`w-10 h-10 md:w-12 md:h-12 mb-3 ${iconColor} group-hover:scale-110 transition-transform`} />
+                    <Icon className={`w-10 h-10 md:w-12 md:h-12 mb-3 ${iconColor} group-hover:scale-110 transition-transform duration-500`} />
                     <h3 className="text-lg md:text-xl font-bold text-white mb-1">{category.name}</h3>
                     <p className="text-xs md:text-sm text-gray-400 line-clamp-1">
                       {category.description || `Explore ${category.name} recipes`}
