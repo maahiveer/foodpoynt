@@ -207,20 +207,31 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "wordCount": article.content.split(' ').length
     }
 
-    // Display the content exactly as it is in the database
     const finalContent = article.content;
 
+    // Fetch categories for the header
+    const { data: categories } = await supabase
+      .from('categories')
+      .select('id, name, slug, parent_id')
+      .order('name', { ascending: true })
+
     return (
-      <div className="min-h-screen bg-white text-black">
+      <div className="min-h-screen bg-white text-black flex flex-col">
         {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        <article className="w-full m-0 p-0 bg-white">
-          <ArticleRenderer content={finalContent} />
-        </article>
+        <BlogHeader categories={categories || []} />
+
+        <main className="flex-1">
+          <article className="w-full m-0 p-0 bg-white">
+            <ArticleRenderer content={finalContent} />
+          </article>
+        </main>
+
+        <BlogFooter />
       </div>
     )
   } catch (error) {
