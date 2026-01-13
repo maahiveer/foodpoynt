@@ -223,7 +223,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        <BlogHeader categories={categories || []} />
+        <BlogHeader categories={categories || []} theme="light" />
 
         <main className="flex-1">
           <article className="w-full m-0 p-0 bg-white">

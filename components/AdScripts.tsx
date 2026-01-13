@@ -40,15 +40,19 @@ export function AdScripts() {
 
     return (
         <>
-            {/* Monetag Interstitial Ads */}
+            {/* Monetag Interstitial Ads - REMOVED */}
+            {/* 
             <Script id="monetag-interstitial" strategy="afterInteractive">
                 {`(function(s){s.dataset.zone='10327495',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
             </Script>
+            */}
 
-            {/* Monetag Inpage Push Ads */}
+            {/* Monetag Inpage Push Ads - REMOVED */}
+            {/*
             <Script id="monetag-inpage-push" strategy="afterInteractive">
                 {`(function(s){s.dataset.zone='10450838',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
             </Script>
+            */}
         </>
     )
 }
