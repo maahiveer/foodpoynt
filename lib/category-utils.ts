@@ -1,19 +1,18 @@
-import { UtensilsCrossed, Cookie, Salad, Pizza, Coffee, Soup, Cake, Leaf, LucideIcon } from 'lucide-react'
+import { Leaf, Sprout, Flower, Sun, CloudRain, Shovel, Trees, Mountain, LucideIcon } from 'lucide-react'
 
 export const getCategoryIcon = (name: string): LucideIcon => {
     const lowerName = name.toLowerCase()
-    if (lowerName.includes('italian') || lowerName.includes('pizza') || lowerName.includes('pasta')) return Pizza
-    if (lowerName.includes('asian') || lowerName.includes('chinese') || lowerName.includes('japanese')) return UtensilsCrossed
-    if (lowerName.includes('dessert') || lowerName.includes('sweet') || lowerName.includes('cake') || lowerName.includes('bakery')) return Cake
-    if (lowerName.includes('breakfast') || lowerName.includes('coffee')) return Coffee
-    if (lowerName.includes('healthy') || lowerName.includes('salad') || lowerName.includes('diet')) return Salad
-    if (lowerName.includes('vegan') || lowerName.includes('plant')) return Leaf
-    if (lowerName.includes('quick') || lowerName.includes('fast')) return UtensilsCrossed
-    if (lowerName.includes('comfort') || lowerName.includes('soup')) return Soup
-    if (lowerName.includes('cookie') || lowerName.includes('snack')) return Cookie
+    if (lowerName.includes('vegetable') || lowerName.includes('food') || lowerName.includes('harvest')) return Sprout
+    if (lowerName.includes('flower') || lowerName.includes('bloom') || lowerName.includes('rose')) return Flower
+    if (lowerName.includes('indoor') || lowerName.includes('house') || lowerName.includes('pot')) return Sun
+    if (lowerName.includes('tool') || lowerName.includes('gear') || lowerName.includes('equipment')) return Shovel
+    if (lowerName.includes('tree') || lowerName.includes('shrub') || lowerName.includes('bush')) return Trees
+    if (lowerName.includes('landscape') || lowerName.includes('garden') || lowerName.includes('design')) return Mountain
+    if (lowerName.includes('water') || lowerName.includes('irrigation')) return CloudRain
+    if (lowerName.includes('soil') || lowerName.includes('dirt')) return Shovel // Fallback to shovel for soil
 
     // High-quality random fallback icons
-    const fallbacks = [UtensilsCrossed, Soup, Salad, Pizza, Coffee, Leaf, Cake, Cookie]
+    const fallbacks = [Leaf, Sprout, Flower, Trees, Sun, Shovel, Mountain]
     const charSum = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
     return fallbacks[charSum % fallbacks.length]
 }
