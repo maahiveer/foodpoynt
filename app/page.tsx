@@ -54,14 +54,14 @@ export default async function Home() {
       {/* Hero Section */}
       <div className="relative pt-12 pb-12 md:pt-20 md:pb-16 overflow-hidden">
         {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0 opacity-50 pointer-events-none">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src="/images/hero-bg.png"
             alt="Delicious cooking background"
             className="w-full h-full object-cover"
             style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030014]/30 to-[#030014]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#030014]" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
