@@ -25,6 +25,13 @@
     color: var(--foreground);
     @apply antialiased overflow-x-hidden selection:bg-purple-500/30 selection:text-purple-200;
   }
+
+  /* Global Hyphen Killer */
+  * {
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -ms-hyphens: none !important;
+  }
 }
 
 @layer utilities {
