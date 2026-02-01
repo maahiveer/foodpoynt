@@ -66,12 +66,14 @@
 
 /* Natural Article Content - Preserves HTML colors */
 .article-content {
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
-  word-break: normal !important;
+  overflow-wrap: normal !important;
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+  /* Try keep-all or normal */
   hyphens: none !important;
   -webkit-hyphens: none !important;
   -ms-hyphens: none !important;
+  white-space: normal !important;
   max-width: 100%;
   overflow-x: hidden;
 }
