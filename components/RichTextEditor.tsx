@@ -2,14 +2,10 @@
 
 import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import 'react-quill/dist/quill.snow.css'
+import 'react-quill-new/dist/quill.snow.css'
 
 // Dynamic import for ReactQuill to avoid SSR issues
-// Dynamic import for ReactQuill to avoid SSR issues
-const ReactQuill = dynamic(async () => {
-  const { default: RQ } = await import('react-quill-new');
-  return ({ forwardedRef, ...props }: any) => <RQ ref={forwardedRef} {...props} />;
-}, {
+const ReactQuill = dynamic(() => import('react-quill-new'), {
   ssr: false,
   loading: () => <div className="h-96 w-full bg-slate-50 animate-pulse rounded-lg border border-slate-200 flex items-center justify-center text-slate-400">Loading Editor...</div>
 })
