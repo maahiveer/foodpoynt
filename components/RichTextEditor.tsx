@@ -5,10 +5,19 @@ import dynamic from 'next/dynamic'
 import 'react-quill-new/dist/quill.snow.css'
 
 // Dynamic import for ReactQuill to avoid SSR issues
-const ReactQuill = dynamic(() => import('react-quill-new'), {
-  ssr: false,
-  loading: () => <div className="h-96 w-full bg-slate-50 animate-pulse rounded-lg border border-slate-200 flex items-center justify-center text-slate-400">Loading Editor...</div>
-})
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import('react-quill-new')
+    function ReactQuillWrapper({ forwardedRef, ...props }: any) {
+      return <RQ ref={forwardedRef} {...props} />
+    }
+    return ReactQuillWrapper
+  },
+  {
+    ssr: false,
+    loading: () => <div className="h-96 w-full bg-slate-50 animate-pulse rounded-lg border border-slate-200 flex items-center justify-center text-slate-400">Loading Editor...</div>
+  }
+)
 
 interface RichTextEditorProps {
   value: string
@@ -180,7 +189,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
         }
       `}</style>
       <ReactQuill
-        ref={quillRef}
+        forwardedRef={quillRef}
         theme="snow"
         value={value}
         onChange={onChange}
