@@ -48,11 +48,55 @@ export async function POST(request: Request) {
     }
 }
 
+async function getApiKeys() {
+    try {
+        // Try to import supabase dynamically to avoid circular dependencies
+        const { createClient } = await import('@supabase/supabase-js')
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+        if (!supabaseUrl || !supabaseKey) {
+            return {
+                openrouterKey: process.env.OPENROUTER_API_KEY,
+                replicateToken: process.env.REPLICATE_API_TOKEN
+            }
+        }
+
+        const supabase = createClient(supabaseUrl, supabaseKey)
+
+        const { data, error } = await supabase
+            .from('site_settings')
+            .select('setting_key, setting_value')
+            .in('setting_key', ['openrouter_api_key', 'replicate_api_token'])
+
+        if (error || !data) {
+            return {
+                openrouterKey: process.env.OPENROUTER_API_KEY,
+                replicateToken: process.env.REPLICATE_API_TOKEN
+            }
+        }
+
+        const openrouterSetting = data.find(s => s.setting_key === 'openrouter_api_key')
+        const replicateSetting = data.find(s => s.setting_key === 'replicate_api_token')
+
+        return {
+            openrouterKey: openrouterSetting?.setting_value || process.env.OPENROUTER_API_KEY,
+            replicateToken: replicateSetting?.setting_value || process.env.REPLICATE_API_TOKEN
+        }
+    } catch (error) {
+        console.error('Error fetching API keys from database:', error)
+        return {
+            openrouterKey: process.env.OPENROUTER_API_KEY,
+            replicateToken: process.env.REPLICATE_API_TOKEN
+        }
+    }
+}
+
 async function generateArticleContent(topic: string, cleanTopic: string, itemCount: number, keywords?: string) {
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY
+    const { openrouterKey: OPENROUTER_API_KEY } = await getApiKeys()
 
     if (!OPENROUTER_API_KEY) {
-        throw new Error('OPENROUTER_API_KEY not configured')
+        throw new Error('OPENROUTER_API_KEY not configured. Please add it in Settings.')
     }
 
     const keywordsSection = keywords ? `
@@ -162,7 +206,7 @@ Remember: Output ONLY the JSON object, nothing else.`
 }
 
 async function generateImages(items: ListicleItem[]) {
-    const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN
+    const { replicateToken: REPLICATE_API_TOKEN } = await getApiKeys()
 
     if (!REPLICATE_API_TOKEN) {
         console.warn('REPLICATE_API_TOKEN not configured, using fallback images')
