@@ -73,20 +73,20 @@
 
 /* Natural Article Content - Preserves HTML colors */
 .article-content {
-  overflow-wrap: normal !important;
-  /* Allow wrapping to prevent cutoff */
-  word-wrap: normal !important;
+  overflow-wrap: break-word !important;
+  /* Allow wrapping at word boundaries to prevent cutoff */
+  word-wrap: break-word !important;
   word-break: normal !important;
-  /* Standard breaking */
+  /* Standard word breaking, avoids splitting mid-word */
+  line-break: relaxed !important;
   hyphens: none !important;
-  /* STRICTLY DISABLE HYPHENS */
+  /* STRICTLY DISABLE AUTO-HYPHENATION */
   -webkit-hyphens: none !important;
   -ms-hyphens: none !important;
   text-align: left !important;
   white-space: normal !important;
-  /* Force standard wrapping at spaces */
+  /* Ensure standard whitespace handling */
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 .article-content * {

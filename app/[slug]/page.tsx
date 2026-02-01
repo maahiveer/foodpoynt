@@ -212,7 +212,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const finalContent = article.content
       .replace(/&shy;/g, '')
       .replace(/\u00AD/g, '')
-      .replace(/\u200B/g, '');
+      .replace(/\u200B/g, '')
+      .replace(/&nbsp;/g, ' ');
 
 
 
