@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { AdminLayout } from '@/components/AdminLayout'
 import { supabase } from '@/lib/supabase'
-import { Save, Key, Eye, EyeOff } from 'lucide-react'
+import { Save, Key, Eye, EyeOff, Sparkles } from 'lucide-react'
 
 interface SiteSetting {
     setting_key: string
