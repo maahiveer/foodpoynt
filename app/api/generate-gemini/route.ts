@@ -99,6 +99,41 @@ async function getGeminiKey() {
     }
 }
 
+// Helper to find a working model for the specific API key
+async function getWorkingGeminiModel(apiKey: string): Promise<string> {
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        if (!response.ok) return 'gemini-1.5-flash'; // Fallback
+
+        const data = await response.json();
+        const models = data.models || [];
+
+        // Filter for models that support text generation
+        const generateModels = models.filter((m: any) =>
+            m.supportedGenerationMethods &&
+            m.supportedGenerationMethods.includes('generateContent') &&
+            m.name.includes('gemini')
+        );
+
+        // Sort preference: 1.5-flash -> 1.5-pro -> 1.0-pro -> any gemini
+        const preferredOrder = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro', 'gemini-1.0-pro'];
+
+        for (const pref of preferredOrder) {
+            const found = generateModels.find((m: any) => m.name.includes(pref));
+            if (found) return found.name.replace('models/', '');
+        }
+
+        if (generateModels.length > 0) {
+            return generateModels[0].name.replace('models/', '');
+        }
+
+        return 'gemini-1.5-flash'; // Ultimate fallback
+    } catch (e) {
+        console.error("Error listing models:", e);
+        return 'gemini-1.5-flash';
+    }
+}
+
 async function generateWithGemini(topic: string, cleanTopic: string, itemCount: number, keywords: string | undefined, apiKey: string) {
     const keywordsSection = keywords ? `\n\nSEO KEYWORDS TO INCORPORATE:\n${keywords}\n\nNaturally weave these keywords throughout the article for SEO optimization.` : ''
 
@@ -148,7 +183,11 @@ Conclusion Requirements:
 
 Remember: Output ONLY the JSON object, nothing else.`
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`, {
+    // Dynamically find the best available model for this key
+    const modelName = await getWorkingGeminiModel(apiKey);
+    console.log(`Using Gemini model: ${modelName}`);
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -160,8 +199,10 @@ Remember: Output ONLY the JSON object, nothing else.`
                 }]
             }],
             generationConfig: {
-                temperature: 0.8,
-                maxOutputTokens: 8000
+                temperature: 0.7,
+                maxOutputTokens: 8192,
+                // Only use responseMimeType if it's a 1.5 model, as 1.0 doesn't support it well via REST usually
+                responseMimeType: modelName.includes('1.5') ? "application/json" : undefined
             }
         })
     })
@@ -169,7 +210,7 @@ Remember: Output ONLY the JSON object, nothing else.`
     if (!response.ok) {
         const errorText = await response.text()
         console.error("Gemini API Error Detail:", errorText)
-        throw new Error(`Gemini API error (${response.status}): ${errorText}`)
+        throw new Error(`Gemini API error (${modelName}): ${errorText}`)
     }
 
     const data = await response.json()
