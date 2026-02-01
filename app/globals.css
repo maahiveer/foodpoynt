@@ -68,7 +68,8 @@
 .article-content {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
+  /* Was break-word, causing weird splits */
   max-width: 100%;
   overflow-x: hidden;
 }
