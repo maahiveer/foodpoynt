@@ -60,6 +60,7 @@ export default function SettingsPage() {
 
                 const apiFreeKeyData = settings.find(s => s.setting_key === 'apifree_api_key')
                 const apiFreeModelData = settings.find(s => s.setting_key === 'apifree_model')
+                const apiFreeImageModelData = settings.find(s => s.setting_key === 'apifree_image_model')
 
                 setOpenrouterKey(openrouterData?.setting_value || '')
                 setReplicateKey(replicateData?.setting_value || '')
@@ -68,6 +69,7 @@ export default function SettingsPage() {
 
                 setApiFreeKey(apiFreeKeyData?.setting_value || '')
                 setApiFreeModel(apiFreeModelData?.setting_value || 'gpt-4o')
+                setApiFreeImageModel(apiFreeImageModelData?.setting_value || 'dall-e-3')
             }
         } catch (error) {
             console.error('Error fetching settings:', error)
