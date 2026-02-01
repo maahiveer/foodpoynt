@@ -183,61 +183,103 @@ Conclusion Requirements:
 
 Remember: Output ONLY the JSON object, nothing else.`
 
-    // Dynamically find the best available model for this key
-    const modelName = await getWorkingGeminiModel(apiKey);
-    console.log(`Using Gemini model: ${modelName}`);
+    // List of models to try in order
+    // 1. Dynamic discovery (best match)
+    // 2. Flash (fastest, best free limits)
+    // 3. Pro (stable, standard)
+    const discoveredModel = await getWorkingGeminiModel(apiKey);
+    console.log(`Discovered best model: ${discoveredModel}`);
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            contents: [{
-                parts: [{
-                    text: prompt
-                }]
-            }],
-            generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 8192,
-                // Only use responseMimeType if it's a 1.5 model, as 1.0 doesn't support it well via REST usually
-                responseMimeType: modelName.includes('1.5') ? "application/json" : undefined
+    const modelsToTry = [
+        discoveredModel,
+        'gemini-1.5-flash',
+        'gemini-1.5-flash-latest',
+        'gemini-1.0-pro',
+        'gemini-pro'
+    ];
+
+    // Remove duplicates
+    const uniqueModels = [...new Set(modelsToTry)];
+
+    let lastError: any = null;
+
+    for (const modelName of uniqueModels) {
+        try {
+            console.log(`Attempting generation with model: ${modelName}`);
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 8192,
+                        // Only use responseMimeType if it's a 1.5 model
+                        responseMimeType: modelName.includes('1.5') ? "application/json" : undefined
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                // If 404 (Not Found) or 429 (Rate Limit/Quota), try next model
+                if (response.status === 404 || response.status === 429) {
+                    console.warn(`Model ${modelName} failed with ${response.status}: ${errorText}`);
+                    lastError = new Error(`Gemini API error (${modelName} - ${response.status}): ${errorText}`);
+                    continue; // Try next model
+                }
+                // For other errors (500, 400), throw immediately
+                throw new Error(`Gemini API error (${modelName} - ${response.status}): ${errorText}`);
             }
-        })
-    })
 
-    if (!response.ok) {
-        const errorText = await response.text()
-        console.error("Gemini API Error Detail:", errorText)
-        throw new Error(`Gemini API error (${modelName}): ${errorText}`)
-    }
+            const data = await response.json();
 
-    const data = await response.json()
-    const content = data.candidates[0].content.parts[0].text
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                console.warn(`Model ${modelName} returned empty response`);
+                continue;
+            }
 
-    // Extract JSON from response
-    let jsonContent = content.trim()
+            const content = data.candidates[0].content.parts[0].text;
 
-    // Remove markdown code blocks if present
-    if (jsonContent.startsWith('```')) {
-        const jsonMatch = jsonContent.match(/```(?:json)?\n([\s\S]*?)\n```/)
-        if (jsonMatch) {
-            jsonContent = jsonMatch[1]
+            // Extract JSON from response
+            let jsonContent = content.trim()
+
+            // Remove markdown code blocks if present
+            if (jsonContent.startsWith('```')) {
+                const jsonMatch = jsonContent.match(/```(?:json)?\n([\s\S]*?)\n```/)
+                if (jsonMatch) {
+                    jsonContent = jsonMatch[1]
+                }
+            }
+
+            const parsed = JSON.parse(jsonContent)
+
+            return {
+                title: parsed.title,
+                slug: topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+                excerpt: parsed.intro.substring(0, 160).replace(/<[^>]*>/g, '') + '...',
+                intro: parsed.intro,
+                items: parsed.items,
+                conclusion: parsed.conclusion,
+                tags: [cleanTopic.split(' ')[0], 'Guide', 'Ideas', 'Inspiration', '2024']
+            }
+
+        } catch (error) {
+            console.error(`Attempt failed with ${modelName}:`, error);
+            lastError = error;
+            // Continue to next model in loop if available
         }
     }
 
-    const parsed = JSON.parse(jsonContent)
-
-    return {
-        title: parsed.title,
-        slug: topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-        excerpt: parsed.intro.substring(0, 160).replace(/<[^>]*>/g, '') + '...',
-        intro: parsed.intro,
-        items: parsed.items,
-        conclusion: parsed.conclusion,
-        tags: [cleanTopic.split(' ')[0], 'Guide', 'Ideas', 'Inspiration', '2024']
-    }
+    // If we get here, all models failed
+    throw lastError || new Error("All Gemini models failed to generate content.");
 }
 
 function constructHTML(articleContent: any, itemsWithImages: any[]) {
