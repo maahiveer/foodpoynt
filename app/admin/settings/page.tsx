@@ -63,27 +63,25 @@ export default function SettingsPage() {
         setSuccess('')
 
         try {
+            const updates = [
+                { setting_key: 'openrouter_api_key', setting_value: openrouterKey.trim() || null, updated_at: new Date().toISOString() },
+                { setting_key: 'replicate_api_token', setting_value: replicateKey.trim() || null, updated_at: new Date().toISOString() },
+                { setting_key: 'gemini_api_key', setting_value: geminiKey.trim() || null, updated_at: new Date().toISOString() },
+                { setting_key: 'openrouter_model', setting_value: openRouterModel.trim() || 'anthropic/claude-3.5-sonnet', updated_at: new Date().toISOString() }
+            ]
 
-            if (replicateError) throw replicateError
-
-            // Update Gemini API Key
-            const { error: geminiError } = await supabase
+            const { error: upsertError } = await supabase
                 .from('site_settings')
-                .upsert({
-                    setting_key: 'gemini_api_key',
-                    setting_value: geminiKey.trim() || null,
-                    updated_at: new Date().toISOString()
-                }, {
-                    onConflict: 'setting_key'
-                })
+                .upsert(updates, { onConflict: 'setting_key' })
 
-            if (geminiError) throw geminiError
+            if (upsertError) throw upsertError
 
-            setSuccess('API keys saved successfully! Advanced AI Generator is now ready to use.')
+            setSuccess('Settings saved successfully! You are ready to generate.')
             setTimeout(() => setSuccess(''), 5000)
-        } catch (error) {
-            console.error('Error saving settings:', error)
-            setError('Failed to save API keys. Please try again.')
+            fetchSettings()
+        } catch (err: any) {
+            console.error('Error saving settings:', err)
+            setError(err.message || 'Failed to save settings. Please try again.')
         } finally {
             setLoading(false)
         }
