@@ -86,7 +86,7 @@ async function getApiKeys() {
         const apiFreeModelSetting = data.find(s => s.setting_key === 'apifree_model')
         const apiFreeImageModelSetting = data.find(s => s.setting_key === 'apifree_image_model')
 
-        return {
+        const keys = {
             openrouterKey: openrouterSetting?.setting_value || envKeys.openrouterKey,
             replicateToken: replicateSetting?.setting_value || envKeys.replicateToken,
             openrouterModel: modelSetting?.setting_value || envKeys.openrouterModel,
@@ -94,6 +94,16 @@ async function getApiKeys() {
             apiFreeModel: apiFreeModelSetting?.setting_value || envKeys.apiFreeModel,
             apiFreeImageModel: apiFreeImageModelSetting?.setting_value || 'dall-e-3'
         }
+
+        console.log('API Keys Loaded:', {
+            hasOpenRouter: !!keys.openrouterKey,
+            hasReplicate: !!keys.replicateToken,
+            hasApiFree: !!keys.apiFreeKey,
+            apiFreeKeyStart: keys.apiFreeKey ? keys.apiFreeKey.substring(0, 7) + '...' : 'none',
+            imageModel: keys.apiFreeImageModel
+        })
+
+        return keys
     } catch (error) {
         console.error('Error fetching API keys from database:', error)
         return {
@@ -293,6 +303,7 @@ async function generateImages(items: ListicleItem[] = []) {
                 if (response.ok) {
                     const data = await response.json()
                     if (data.data && data.data[0] && data.data[0].url) {
+                        console.log(`APIFree Image Success for item ${index}: ${data.data[0].url.substring(0, 50)}...`)
                         return { ...item, imageUrl: data.data[0].url }
                     }
                 } else {
@@ -328,19 +339,23 @@ async function generateImages(items: ListicleItem[] = []) {
             }
 
             // Fallback: Pollinations
-            const cleanPrompt = (item.imagePrompt || item.title).replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 500)
+            console.log(`Using Pollinations fallback for item ${index}`)
+            const cleanPrompt = (item.imagePrompt || item.title).replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 300)
+            const seed = Math.floor(Math.random() * 1000000)
             return {
                 ...item,
-                imageUrl: `https://image.pollinations.ai/prompt/${encodeURIComponent(cleanPrompt + " photorealistic quality 4k")}?width=1024&height=1024&nologo=true`
+                imageUrl: `https://pollinations.ai/p/${encodeURIComponent(cleanPrompt + " professional photography 4k photorealistic")}?width=1024&height=1024&seed=${seed}&model=flux`
             }
 
         } catch (error) {
             console.error(`Error generating image for item ${index}:`, error)
             // Fallback: Pollinations
-            const cleanPrompt = (item.imagePrompt || item.title).replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 500)
+            console.log(`Error fallback: Using Pollinations for item ${index}`)
+            const cleanPrompt = (item.imagePrompt || item.title).replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 300)
+            const seed = Math.floor(Math.random() * 1000000)
             return {
                 ...item,
-                imageUrl: `https://image.pollinations.ai/prompt/${encodeURIComponent(cleanPrompt + " photorealistic quality 4k")}?width=1024&height=1024&nologo=true`
+                imageUrl: `https://pollinations.ai/p/${encodeURIComponent(cleanPrompt + " professional photography 4k photorealistic")}?width=1024&height=1024&seed=${seed}&model=flux`
             }
         }
     })
@@ -367,11 +382,12 @@ function constructHTML(articleContent: any, itemsWithImages: any[]) {
     let html = `<div class="article-intro">${articleContent.intro}</div>\n\n`
 
     itemsWithImages.forEach((item, index) => {
+        const displayImage = item.imageUrl || `https://pollinations.ai/p/${encodeURIComponent(item.title + " professional photography")}?width=1024&height=1024&seed=${index}`
         html += `
 <h2>${index + 1}. ${item.title}</h2>
 
 <figure style="margin: 30px 0;">
-  <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" />
+  <img src="${displayImage}" alt="${item.title}" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" />
   <figcaption style="text-align: center; margin-top: 12px; color: #64748b; font-size: 0.9rem; font-style: italic;">${item.title}</figcaption>
 </figure>
 
