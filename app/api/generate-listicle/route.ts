@@ -59,7 +59,8 @@ async function getApiKeys() {
             replicateToken: process.env.REPLICATE_API_TOKEN,
             openrouterModel: 'anthropic/claude-3.5-sonnet',
             apiFreeKey: process.env.APIFREE_API_KEY,
-            apiFreeModel: 'gpt-4o'
+            apiFreeModel: 'gpt-4o',
+            apiFreeImageModel: 'dall-e-3'
         }
 
         if (!supabaseUrl || !supabaseKey) {
