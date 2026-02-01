@@ -238,8 +238,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
 
               {/* Title */}
-              <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
-                {extractedTitle}
+              <h1 className="text-3xl md:text-5xl font-extrabold !text-slate-900 dark:!text-white mb-6 leading-tight break-words">
+                {extractedTitle || 'Untitled Article'}
               </h1>
 
               {/* Meta Data */}
