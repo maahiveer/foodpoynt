@@ -49,44 +49,68 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
           border-color: #cbd5e1 !important;
-          background-color: #f8fafc;
+          background-color: #f8fafc !important;
         }
         .dark .ql-toolbar {
           border-color: #475569 !important;
-          background-color: #1e293b;
-          color: #e2e8f0;
+          background-color: #1e293b !important;
+          color: #e2e8f0 !important;
         }
+        .ql-toolbar .ql-stroke {
+          stroke: #334155;
+        }
+        .ql-toolbar .ql-fill {
+          fill: #334155;
+        }
+        .ql-toolbar .ql-picker {
+          color: #334155;
+        }
+        
         .ql-container {
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
           border-color: #cbd5e1 !important;
-          background-color: white;
+          background-color: white !important;
           font-size: 1rem;
-        }
-        .dark .ql-container {
-          border-color: #475569 !important;
-          background-color: #0f172a;
-          color: #e2e8f0;
+          color: #334155 !important; /* Force dark text */
         }
         .ql-editor {
           min-height: 400px;
+          color: #334155 !important; /* Force dark text */
+          caret-color: #334155 !important; /* Force dark cursor */
         }
         .ql-editor.ql-blank::before {
-          color: #94a3b8;
-          font-style: normal;
+          color: #94a3b8 !important;
+          font-style: italic;
         }
+
+        /* Dark Mode Overrides */
+        .dark .ql-container {
+          border-color: #475569 !important;
+          background-color: #0f172a !important;
+          color: #e2e8f0 !important;
+        }
+        .dark .ql-editor {
+          color: #e2e8f0 !important;
+          caret-color: #e2e8f0 !important;
+        }
+        .dark .ql-editor.ql-blank::before {
+          color: #64748b !important;
+        }
+        
         /* Fix dark mode toolbar icons */
         .dark .ql-snow .ql-stroke {
-          stroke: #e2e8f0;
+          stroke: #e2e8f0 !important;
         }
         .dark .ql-snow .ql-fill {
-          fill: #e2e8f0;
+          fill: #e2e8f0 !important;
         }
         .dark .ql-snow .ql-picker {
-          color: #e2e8f0;
+          color: #e2e8f0 !important;
         }
         .dark .ql-snow .ql-picker-options {
-          background-color: #1e293b;
+          background-color: #1e293b !important;
+          color: #e2e8f0 !important;
         }
       `}</style>
       <ReactQuill
