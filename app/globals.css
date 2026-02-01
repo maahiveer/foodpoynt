@@ -66,10 +66,12 @@
 
 /* Natural Article Content - Preserves HTML colors */
 .article-content {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: normal;
-  /* Was break-word, causing weird splits */
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -ms-hyphens: none !important;
   max-width: 100%;
   overflow-x: hidden;
 }
