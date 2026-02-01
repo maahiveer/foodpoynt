@@ -208,7 +208,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "wordCount": article.content.split(' ').length
     }
 
-    const finalContent = article.content;
+    // Sanitize content to remove soft hyphens and invisible characters that cause rendering artifacts
+    const finalContent = article.content
+      .replace(/&shy;/g, '')
+      .replace(/\u00AD/g, '')
+      .replace(/\u200B/g, '');
 
 
 
