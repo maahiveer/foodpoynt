@@ -8,7 +8,7 @@ interface ListicleItem {
 
 export async function POST(request: Request) {
     try {
-        const { topic } = await request.json()
+        const { topic, keywords } = await request.json()
 
         if (!topic) {
             return NextResponse.json({ error: 'Topic is required' }, { status: 400 })
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         const cleanTopic = topic.replace(/^\d+\s*/, '')
 
         // Step 1: Generate article structure and content using OpenRouter
-        const articleContent = await generateArticleContent(topic, cleanTopic, itemCount)
+        const articleContent = await generateArticleContent(topic, cleanTopic, itemCount, keywords)
 
         // Step 2: Generate images for each item using Replicate
         const itemsWithImages = await generateImages(articleContent.items)
@@ -48,14 +48,21 @@ export async function POST(request: Request) {
     }
 }
 
-async function generateArticleContent(topic: string, cleanTopic: string, itemCount: number) {
+async function generateArticleContent(topic: string, cleanTopic: string, itemCount: number, keywords?: string) {
     const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY
 
     if (!OPENROUTER_API_KEY) {
         throw new Error('OPENROUTER_API_KEY not configured')
     }
 
-    const prompt = `Write a 1,500-word SEO article titled "${topic}" that is both engaging and informative. The article must be written as if you are having a friendly, informal conversation with a fellow enthusiast.
+    const keywordsSection = keywords ? `
+
+SEO KEYWORDS TO INCORPORATE:
+${keywords}
+
+Naturally weave these keywords throughout the article for SEO optimization.` : ''
+
+    const prompt = `Write a 1,500-word SEO article titled "${topic}" that is both engaging and informative. The article must be written as if you are having a friendly, informal conversation with a fellow enthusiast.${keywordsSection}
 
 CRITICAL FORMATTING REQUIREMENT: You MUST respond with ONLY valid JSON in this exact structure (no markdown, no code blocks, just pure JSON):
 
