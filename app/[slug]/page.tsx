@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase'
 import { Calendar, Clock, User } from 'lucide-react'
 
 import { BlogFooter } from '@/components/BlogFooter'
+import { BlogHeader } from '@/components/BlogHeader'
 
 interface ArticlePageProps {
   params: Promise<{
