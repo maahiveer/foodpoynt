@@ -29,7 +29,10 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       [{ 'align': [] }],
       ['link', 'image', 'video'],
       ['clean']
-    ]
+    ],
+    clipboard: {
+      matchVisual: false
+    }
   }), [])
 
   const formats = [
@@ -45,6 +48,14 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
   return (
     <div className="rich-text-editor">
       <style jsx global>{`
+        /* ... existing styles ... */
+        
+        /* Enforce paragraph spacing in editor */
+        .ql-editor p {
+          margin-bottom: 1em !important;
+          line-height: 1.6 !important;
+        }
+
         .ql-toolbar {
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
@@ -93,6 +104,9 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
         .dark .ql-editor {
           color: #e2e8f0 !important;
           caret-color: #e2e8f0 !important;
+        }
+        .dark .ql-editor p {
+          color: #e2e8f0 !important; 
         }
         .dark .ql-editor.ql-blank::before {
           color: #64748b !important;
