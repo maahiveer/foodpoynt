@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/AuthProvider'
 import { supabase, Category } from '@/lib/supabase'
-import { RichTextEditor } from '@/components/RichTextEditor'
+// import { RichTextEditor } from '@/components/RichTextEditor'
 import {
   Save,
   Eye,
@@ -385,15 +385,27 @@ export function ArticleEditor({ article }: ArticleEditorProps) {
           </div>
 
           {/* Content */}
-          <div>
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Content *
-            </label>
-            <RichTextEditor
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                Content (HTML Mode)
+              </label>
+              <span className="text-xs text-amber-600 dark:text-amber-400 font-medium px-2 py-1 bg-amber-50 dark:bg-amber-900/20 rounded">
+                ⚠️ Visual Editor Disabled (Stability Mode)
+              </span>
+            </div>
+
+            <textarea
+              className="w-full h-[500px] p-4 border border-slate-300 dark:border-slate-600 rounded-lg font-mono text-sm bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 custom-scrollbar"
               value={content}
-              onChange={setContent}
-              placeholder="Write your article content here..."
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="<p>Write your article content here...</p>"
+              spellCheck={false}
             />
+
+            <div className="text-xs text-slate-500 dark:text-slate-400 flex justify-end">
+              Use standard HTML tags for formatting
+            </div>
           </div>
 
           {/* Status */}
