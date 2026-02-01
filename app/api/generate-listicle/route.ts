@@ -113,51 +113,39 @@ async function generateArticleContent(topic: string, cleanTopic: string, itemCou
     const keywordsSection = keywords ? `\n\nSEO KEYWORDS TO INCORPORATE:\n${keywords}\n\nNaturally weave these keywords throughout the article for SEO optimization.` : ''
 
     // Construct Prompt (Same for both providers)
-    const prompt = `Write a 1,500-word SEO article titled "${topic}" that is both engaging and informative. The article must be written as if you are having a friendly, informal conversation with a fellow enthusiast.${keywordsSection}
+    const prompt = `Write a high-quality SEO article titled "${topic}" that is both engaging and informative. The article must be written as if you are having a friendly, informal conversation with a fellow enthusiast.${keywordsSection}
 
-CRITICAL FORMATTING REQUIREMENT: You MUST respond with ONLY valid JSON in this exact structure (no markdown, no code blocks, just pure JSON):
+STYLE & TONE:
+- Conversational and Informal: Write like you're talking to a friend.
+- Use everyday language, avoid formal/academic tone.
+- Inject light sarcasm and humor sparingly.
+- Active voice ONLY.
+- Use rhetorical questions to engage readers.
+- Occasionally use slang (FYI, IMO) and emoticons - limit to 2-3 times total.
 
+STRUCTURE:
+1. Intro: 2-3 paragraph hook (150-200 words).
+2. Items: Create ${itemCount} items based on the topic. Each item should have a title, a 200-word description, and a detailed image prompt.
+3. Conclusion: 100-150 words summarizing key points.
+
+RESPONSE FORMAT:
+You MUST respond with ONLY a valid JSON object. Do not include any text before or after the JSON.
+
+JSON SCHEMA:
 {
-  "title": "SEO-optimized title",
-  "intro": "2-3 paragraph introduction (150-200 words)",
+  "title": "String - SEO Title",
+  "intro": "String - HTML formatted introduction",
   "items": [
     {
-      "title": "Item title",
-      "content": "200-word description",
-      "imagePrompt": "detailed image prompt"
+      "title": "String - Item Title",
+      "content": "String - HTML formatted content (approx 200 words)",
+      "imagePrompt": "String - Detailed prompt for image generation"
     }
   ],
-  "conclusion": "Conclusion paragraph (100-150 words)"
+  "conclusion": "String - HTML formatted conclusion"
 }
 
-Style & Tone Requirements:
-1. Conversational and Informal - Write as if talking to a friend
-2. Use everyday language, avoid formal/academic tone
-3. Inject light sarcasm and humor sparingly
-4. Include personal opinions or anecdotes
-5. Active voice ONLY - "I love this" not "This is loved"
-6. Use rhetorical questions to engage readers
-7. Occasionally use slang (FYI, IMO) and emoticons (:) or :/) - limit to 2-3 times total
-
-Content Requirements:
-- Create ${itemCount} items, each with EXACTLY 200 words
-- Keep paragraphs short (3-4 sentences)
-- Bold key information using <strong> tags
-- Be concise and clear - no filler phrases
-- Include honest comparisons and genuine insights
-- Each item should have a detailed, specific image prompt for photorealistic generation
-
-Introduction Requirements:
-- Start with a punchy hook
-- Avoid generic openers like "In today's world" or "dive into"
-- Immediately address reader's needs
-
-Conclusion Requirements:
-- Concise summary of key points
-- Engaging final thought or call to action
-- Memorable impression with personal touch
-
-Remember: Output ONLY the JSON object, nothing else.`
+Remember: Output ONLY the JSON object.`
 
     let response;
     let provider = '';
@@ -174,8 +162,8 @@ Remember: Output ONLY the JSON object, nothing else.`
             body: JSON.stringify({
                 model: apiFreeModel || 'gpt-4o-mini',
                 messages: [{ role: 'user', content: prompt }],
-                temperature: 0.8,
-                max_tokens: 4000
+                temperature: 0.7,
+                max_tokens: 8000
             })
         })
         provider = 'APIFree';
@@ -192,7 +180,7 @@ Remember: Output ONLY the JSON object, nothing else.`
             body: JSON.stringify({
                 model: openrouterModel,
                 messages: [{ role: 'user', content: prompt }],
-                temperature: 0.8,
+                temperature: 0.7,
                 max_tokens: 8000
             })
         })
@@ -216,33 +204,44 @@ Remember: Output ONLY the JSON object, nothing else.`
 
     const content = data.choices[0].message.content
 
-    // Extract JSON from response (handle markdown code blocks and conversational text)
+    // Robust JSON Extraction
     let jsonContent = content.trim()
-    const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)\s*```/)
-    if (jsonMatch) {
-        jsonContent = jsonMatch[1].trim()
-    } else if (content.indexOf('{') > -1 && content.lastIndexOf('}') > -1) {
-        // Fallback: search for outermost braces
-        const start = content.indexOf('{')
-        const end = content.lastIndexOf('}') + 1
-        jsonContent = content.substring(start, end).trim()
+
+    // 1. Try extracting content within markdown code blocks
+    const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)\s*```/)
+    if (codeBlockMatch) {
+        jsonContent = codeBlockMatch[1].trim()
+    } else {
+        // 2. Try finding the first '{' and last '}'
+        const firstBrace = content.indexOf('{')
+        const lastBrace = content.lastIndexOf('}')
+        if (firstBrace !== -1 && lastBrace !== -1) {
+            jsonContent = content.substring(firstBrace, lastBrace + 1).trim()
+        }
     }
 
     try {
-        const parsed = JSON.parse(jsonContent)
+        // Simple Cleanup: Remove potentially breaking characters/formatting if common
+        // (Like trailing commas before closing braces/brackets)
+        const sanitizedJson = jsonContent
+            .replace(/,\s*}/g, '}')
+            .replace(/,\s*\]/g, ']')
+
+        const parsed = JSON.parse(sanitizedJson)
+
         return {
-            title: parsed.title,
+            title: parsed.title || topic,
             slug: topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-            excerpt: parsed.intro.substring(0, 160).replace(/<[^>]*>/g, '') + '...',
-            intro: parsed.intro,
-            items: parsed.items,
-            conclusion: parsed.conclusion,
+            excerpt: (parsed.intro || '').substring(0, 160).replace(/<[^>]*>/g, '') + '...',
+            intro: parsed.intro || '',
+            items: parsed.items || [],
+            conclusion: parsed.conclusion || '',
             tags: [cleanTopic.split(' ')[0], 'Guide', 'Ideas', 'Inspiration', '2024']
         }
     } catch (e) {
         console.error("JSON Parse Error:", e)
-        console.error("Raw Content:", jsonContent)
-        throw new Error(`Failed to parse AI response. The model didn't return valid JSON.`)
+        console.error("Raw Content Sample:", content.substring(0, 500) + "...")
+        throw new Error(`Failed to parse AI response. The model didn't return valid JSON. Error: ${e instanceof Error ? e.message : 'Unknown'}`)
     }
 }
 
