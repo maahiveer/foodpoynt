@@ -64,10 +64,10 @@ export async function generateMetadata({ params }: ArticlePageProps) {
     const cleanTitle = (title: string) => title.replace(/<[^>]*>/g, '').trim()
 
     const extractedTitle =
+      article.title ||
       (titleMatch?.[1] && cleanTitle(titleMatch[1])) ||
       (h1Match?.[1] && cleanTitle(h1Match[1])) ||
       (h2Match?.[1] && cleanTitle(h2Match[1])) ||
-      article.title ||
       'Untitled Article'
 
     // Clean HTML tags from content for description
@@ -171,10 +171,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     const cleanTitle = (title: string) => title.replace(/<[^>]*>/g, '').trim()
 
     const extractedTitle =
+      article.title ||
       (titleMatch?.[1] && cleanTitle(titleMatch[1])) ||
       (h1Match?.[1] && cleanTitle(h1Match[1])) ||
       (h2Match?.[1] && cleanTitle(h2Match[1])) ||
-      article.title ||
       'Untitled Article'
 
     // Generate structured data for SEO
