@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: CategoryPageProps) {
         }
 
         return {
-            title: `${category.name} Recipes - PickPoynt`,
-            description: category.description || `Browse all delicious ${category.name} recipes on PickPoynt`,
+            title: `${category.name} Gardening - PickPoynt`,
+            description: category.description || `Browse all expert ${category.name} gardening guides on PickPoynt`,
         }
     } catch (error) {
         return { title: 'Category Not Found' }
@@ -126,10 +126,10 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                             {category.name}
                         </h1>
                         <p className="text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto">
-                            {category.description || `Discover our handpicked collection of delicious ${category.name.toLowerCase()} recipes.`}
+                            {category.description || `Discover our handpicked collection of expert ${category.name.toLowerCase()} gardening guides.`}
                         </p>
                         <div className="text-sm font-mono tracking-widest text-purple-400 uppercase">
-                            {totalArticles} {totalArticles === 1 ? 'Recipe' : 'Recipes'} Found
+                            {totalArticles} {totalArticles === 1 ? 'Guide' : 'Guides'} Found
                         </div>
                     </div>
                 </section>
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                                             {article.title}
                                         </h3>
                                         <p className="text-gray-400 text-sm mb-6 line-clamp-3">
-                                            {article.excerpt || "Dive into this delicious recipe and discover step-by-step instructions..."}
+                                            {article.excerpt || "Explore our detailed guide and discover step-by-step gardening instructions..."}
                                         </p>
                                         <div className="mt-auto flex items-center justify-between pt-4 border-t border-white/5">
                                             <div className="flex items-center text-xs text-gray-500 gap-4">
@@ -190,7 +190,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
                     ) : (
                         <div className="text-center py-20 bg-white/5 rounded-2xl border border-white/10 border-dashed">
                             <h3 className="text-2xl font-medium text-gray-300 mb-2">Coming Soon</h3>
-                            <p className="text-gray-500">We're currently preparing some amazing {category.name.toLowerCase()} recipes for you.</p>
+                            <p className="text-gray-500">We're currently preparing some amazing {category.name.toLowerCase()} gardening guides for you.</p>
                         </div>
                     )}
 

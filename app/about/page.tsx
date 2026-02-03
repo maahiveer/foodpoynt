@@ -4,8 +4,8 @@ import { Mail, Youtube, Linkedin, Twitter } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'About Devika Nanda - Food Enthusiast & Founder of PickPoynt',
-  description: 'Meet Devika Nanda, the founder of PickPoynt. A passionate home cook sharing delicious recipes, cooking tips, and culinary inspiration.',
+  title: 'About Devika Nanda - Gardening Enthusiast & Founder of PickPoynt',
+  description: 'Meet Devika Nanda, the founder of PickPoynt. A passionate gardener sharing organic growing tips, garden design inspiration, and sustainable living advice.',
 }
 
 async function getCategories() {
@@ -55,10 +55,10 @@ export default async function AboutPage() {
             {/* Hero Section */}
             <div className="text-center mb-20">
               <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
-                Passion for <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Cooking.</span>
+                Passion for <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">Gardening.</span>
               </h1>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Recipes, tips, and culinary inspiration born from real hours spent in the kitchen.
+                Expert tips, plant care guides, and landscaping inspiration born from real hours spent in the soil.
               </p>
             </div>
 
@@ -67,7 +67,7 @@ export default async function AboutPage() {
               {/* Profile Section */}
               <div className="relative">
                 {/* Banner Background */}
-                <div className="h-32 sm:h-48 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 w-full relative">
+                <div className="h-32 sm:h-48 bg-gradient-to-r from-green-600/20 to-emerald-600/20 w-full relative">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#030014]/20" />
                 </div>
 
@@ -83,7 +83,7 @@ export default async function AboutPage() {
 
                     <div className="pb-4">
                       <h2 className="text-3xl font-bold text-white mb-2">Devika Nanda</h2>
-                      <p className="text-purple-400 font-medium text-lg">Founder & Chief Editor</p>
+                      <p className="text-green-400 font-medium text-lg">Founder & Chief Editor</p>
                     </div>
 
                     <div className="sm:ml-auto pb-4">
@@ -102,16 +102,16 @@ export default async function AboutPage() {
                   {/* Bio Content */}
                   <div className="prose prose-lg prose-invert max-w-none text-gray-400 leading-relaxed space-y-12">
                     <section>
-                      <h3 className="text-2xl font-bold text-white mb-4">Why I Love Cooking</h3>
+                      <h3 className="text-2xl font-bold text-white mb-4">Why I Love Gardening</h3>
                       <div className="space-y-4">
                         <p>
-                          Hi, I'm <strong>Devika Nanda</strong>. My journey with cooking started in my grandmother's kitchen, but it quickly became a lifelong passion. There's something incredibly satisfying about creating delicious meals, experimenting with flavors, and sharing food with loved ones.
+                          Hi, I&apos;m <strong>Devika Nanda</strong>. My journey with gardening started in my family&apos;s backyard, but it quickly became a lifelong passion. There&apos;s something incredibly satisfying about growing your own food, nurturing life from seed, and sharing the harvest with loved ones.
                         </p>
                         <p>
-                          I spend my weekends in the <strong>kitchen</strong>, testing new recipes and perfecting old favorites. Whether it's mastering the perfect pasta sauce or discovering the secrets to fluffy pancakes, I live for the culinary details.
+                          I spend my weekends in the <strong>garden</strong>, tending to my plants and experimenting with new varieties. Whether it&apos;s mastering soil health or discovering the secrets to a thriving vegetable patch, I live for the botanical details.
                         </p>
                         <p>
-                          Cooking isn't just a hobby to me; it's a way of life. It's creative, rewarding, and brings people together. But finding reliable recipes can be challenging. That's why I started PickPoynt—to share my kitchen experiences and help you create amazing meals.
+                          Gardening isn&apos;t just a hobby to me; it&apos;s a way of life. It&apos;s creative, rewarding, and connects us with nature. But finding reliable gardening advice can be challenging. That&apos;s why I started PickPoynt—to share my gardening experiences and help you grow a thriving outdoor space.
                         </p>
                       </div>
                     </section>
@@ -120,10 +120,10 @@ export default async function AboutPage() {
                       <h3 className="text-2xl font-bold text-white mb-4">The PickPoynt Mission</h3>
                       <div className="space-y-4">
                         <p>
-                          My mission with PickPoynt is simple: to create a resource that is packed with genuine, kitchen-tested recipes. I believe that the best dishes aren't always the most complicated—it's what works best for your taste and lifestyle.
+                          My mission with PickPoynt is simple: to create a resource that is packed with genuine, garden-tested advice. I believe that the most beautiful gardens aren&apos;t always the most complicated—it&apos;s what works best for your environment and lifestyle.
                         </p>
                         <p>
-                          Every recipe on this site comes from real-world testing in my kitchen. Whether I'm analyzing flavor profiles or cooking techniques, my goal is to give you the honest information you need to create delicious meals.
+                          Every guide on this site comes from real-world testing in my garden. Whether I&apos;m analyzing plant performance or growing techniques, my goal is to give you the honest information you need to create a beautiful, productive garden.
                         </p>
                       </div>
                     </section>
@@ -133,13 +133,13 @@ export default async function AboutPage() {
 
               {/* Contact / Socials */}
               <div className="bg-white/5 p-8 sm:p-12 border-t border-white/10">
-                <h3 className="text-2xl font-bold text-white mb-8 text-center">Let's Connect</h3>
+                <h3 className="text-2xl font-bold text-white mb-8 text-center">Let&apos;s Connect</h3>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a
                     href="mailto:hello@pickpoynt.com"
-                    className="flex items-center px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:border-purple-500/50 transition-all text-gray-300 font-medium"
+                    className="flex items-center px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:border-green-500/50 transition-all text-gray-300 font-medium"
                   >
-                    <Mail className="h-5 w-5 mr-3 text-purple-400" />
+                    <Mail className="h-5 w-5 mr-3 text-green-400" />
                     hello@pickpoynt.com
                   </a>
 
@@ -169,19 +169,19 @@ export default async function AboutPage() {
 
             {/* Newsletter CTA */}
             <div className="mt-20 relative rounded-3xl p-8 sm:p-16 text-center border border-white/10 overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-cyan-600/10 -z-10" />
-              <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-emerald-600/10 -z-10" />
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
 
               <h2 className="text-4xl font-bold mb-6 text-white">Join Our Community</h2>
               <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Get the latest recipes, exclusive kitchen tips, and personal updates delivered directly to your inbox.
+                Get the latest gardening tips, seasonal planting guides, and personal updates delivered directly to your inbox.
               </p>
               <form className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email"
                   required
-                  className="px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 backdrop-blur-sm w-full transition-all"
+                  className="px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 backdrop-blur-sm w-full transition-all"
                 />
                 <button type="submit" className="px-10 py-4 bg-white text-black hover:bg-gray-200 rounded-full font-bold transition-all shadow-xl hover:scale-105 active:scale-95 whitespace-nowrap">
                   Subscribe

@@ -402,7 +402,7 @@ export function CategoryManager() {
                                                 <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
                                                     <FileText className="h-4 w-4 mr-1.5" />
                                                     <span className="font-medium">{articleCounts[category.id] || 0}</span>
-                                                    <span className="ml-1">recipes</span>
+                                                    <span className="ml-1">guides</span>
                                                 </div>
 
                                                 {/* Action Buttons */}

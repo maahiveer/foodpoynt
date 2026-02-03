@@ -24,22 +24,24 @@ export function ArticleRenderer({ content }: ArticleRendererProps) {
         })
 
         // Add support for "Print" buttons if they exist in the HTML
-        const printButtons = containerRef.current.querySelectorAll('.print-recipe, #print-recipe, [href*="print"]')
+        const printButtons = containerRef.current.querySelectorAll('.print-recipe, #print-recipe, .print-guide, #print-guide, .print-article, #print-article, [href*="print"]')
         printButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 if (btn.tagName === 'A' && btn.getAttribute('href')?.includes('print')) {
                     // If it's a link, we might want to prevent default and just print the current page 
                     // but often these are specific print URLs. For now, let's just make sure window.print works
                 }
-                // Common trigger for recipe tool print
-                if (btn.classList.contains('print-recipe') || btn.id === 'print-recipe') {
+                // Common trigger for recipe/guide tool print
+                if (btn.classList.contains('print-recipe') || btn.id === 'print-recipe' ||
+                    btn.classList.contains('print-guide') || btn.id === 'print-guide' ||
+                    btn.classList.contains('print-article') || btn.id === 'print-article') {
                     e.preventDefault()
                     window.print()
                 }
             })
         })
 
-        // Add smooth scroll for "Jump to Recipe" links
+        // Add smooth scroll for "Jump to Recipe/Guide" links
         const jumpLinks = containerRef.current.querySelectorAll('a[href^="#"]')
         jumpLinks.forEach(link => {
             link.addEventListener('click', (e) => {
