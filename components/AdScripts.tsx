@@ -40,7 +40,11 @@ export function AdScripts() {
 
     return (
         <>
-            {/* Any future ad scripts can be added here */}
+            {/* Responsive Ad Script */}
+            <Script
+                src="//data527.click/js/responsive.js"
+                strategy="afterInteractive"
+            />
         </>
     )
 }
