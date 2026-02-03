@@ -29,6 +29,22 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
   const quillRef = useRef<any>(null)
 
   const imageHandler = useCallback(() => {
+    const url = window.prompt('Enter Image URL (leave empty to upload file from your computer):')
+
+    // If user clicks Cancel (null), abort
+    if (url === null) return
+
+    // If user enters a URL, use it
+    if (url.trim() !== '') {
+      const quill = quillRef.current?.getEditor()
+      if (quill) {
+        const range = quill.getSelection()
+        quill.insertEmbed(range?.index || 0, 'image', url.trim())
+      }
+      return
+    }
+
+    // Otherwise, proceed with file upload
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
     input.setAttribute('accept', 'image/*')
