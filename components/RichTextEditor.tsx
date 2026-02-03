@@ -134,15 +134,20 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
         }
 
         .ql-toolbar {
+          position: sticky;
+          top: 0;
+          z-index: 40;
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
           border-color: #cbd5e1 !important;
           background-color: #f8fafc !important;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         .dark .ql-toolbar {
           border-color: #475569 !important;
           background-color: #1e293b !important;
           color: #e2e8f0 !important;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .ql-toolbar .ql-stroke {
           stroke: #334155;
