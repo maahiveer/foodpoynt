@@ -5,7 +5,7 @@ import { FolderOpen, FileText } from 'lucide-react'
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-    title: 'Categories - PickPoynt',
+    title: 'Categories - decorPoynt',
     description: 'Browse all article categories',
 }
 

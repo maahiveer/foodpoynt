@@ -180,8 +180,8 @@ JSON SCHEMA:
             headers: {
                 'Authorization': `Bearer ${openrouterKey}`,
                 'Content-Type': 'application/json',
-                'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'https://pickpoynt.com',
-                'X-Title': 'PickPoynt Article Generator'
+                'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'https://decorPoynt.com',
+                'X-Title': 'decorPoynt Article Generator'
             },
             body: JSON.stringify({
                 model: openrouterModel,

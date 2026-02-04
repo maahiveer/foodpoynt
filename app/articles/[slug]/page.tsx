@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     return { title: 'Article Not Found' }
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
   const cleanContent = article.content.replace(/<[^>]*>/g, '').substring(0, 160)
   const description = article.excerpt || cleanContent
 
@@ -63,10 +63,10 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       description: description,
       type: 'article',
       publishedTime: article.published_at,
-      authors: [article.user_profiles?.full_name || 'PickPoynt Author'],
+      authors: [article.user_profiles?.full_name || 'decorPoynt Author'],
       tags: article.tags || [],
       url: `${siteUrl}/articles/${article.slug}`,
-      siteName: 'PickPoynt',
+      siteName: 'decorPoynt',
       images: [
         {
           url: article.featured_image || `${siteUrl}/og-image.png`,
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       title: article.title,
       description: description,
       images: [article.featured_image || `${siteUrl}/og-image.png`],
-      creator: '@pickpoynt',
+      creator: '@decorpoynt',
     },
     alternates: {
       canonical: `${siteUrl}/articles/${article.slug}`,
@@ -97,7 +97,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound()
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -126,11 +126,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     "dateModified": article.updated_at,
     "author": {
       "@type": "Person",
-      "name": article.user_profiles?.full_name || "PickPoynt Author"
+      "name": article.user_profiles?.full_name || "decorPoynt Author"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "PickPoynt",
+      "name": "decorPoynt",
       "logo": {
         "@type": "ImageObject",
         "url": `${siteUrl}/logo.png`

@@ -3,8 +3,8 @@ import { BlogFooter } from '@/components/BlogFooter'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Affiliate Disclaimer - PickPoynt',
-  description: 'Affiliate disclaimer for PickPoynt. Learn about our affiliate relationships and how they may affect our content.',
+  title: 'Affiliate Disclaimer - decorPoynt',
+  description: 'Affiliate disclaimer for decorPoynt. Learn about our affiliate relationships and how they may affect our content.',
 }
 
 async function getCategories() {
@@ -73,7 +73,7 @@ export default async function AffiliateDisclaimerPage() {
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Our Affiliate Relationships</h2>
                 <p className="mb-4">
-                  PickPoynt participates in various affiliate marketing programs, which means we may earn
+                  decorPoynt participates in various affiliate marketing programs, which means we may earn
                   commissions on purchases made through our links to:
                 </p>
                 <ul className="list-disc pl-6 mb-4">
@@ -155,8 +155,8 @@ export default async function AffiliateDisclaimerPage() {
                   If you have any questions about this Affiliate Disclaimer, please contact us at:
                 </p>
                 <p className="mb-4">
-                  Email: affiliates@pickpoynt.com<br />
-                  Address: PickPoynt, Affiliate Department
+                  Email: affiliates@decorPoynt.com<br />
+                  Address: decorPoynt, Affiliate Department
                 </p>
 
                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mt-8">
@@ -166,7 +166,7 @@ export default async function AffiliateDisclaimerPage() {
                   <p className="text-blue-700 dark:text-blue-300">
                     We appreciate your trust in our recommendations. When you use our affiliate links,
                     you're helping us continue to provide valuable content and resources to the developer
-                    community. Thank you for supporting PickPoynt!
+                    community. Thank you for supporting decorPoynt!
                   </p>
                 </div>
               </div>

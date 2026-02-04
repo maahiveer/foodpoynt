@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: CategoryPageProps) {
         }
 
         return {
-            title: `${category.name} Decor - PickPoynt`,
-            description: category.description || `Browse all expert ${category.name} home decor guides on PickPoynt`,
+            title: `${category.name} Decor - decorPoynt`,
+            description: category.description || `Browse all expert ${category.name} home decor guides on decorPoynt`,
         }
     } catch (error) {
         return { title: 'Category Not Found' }

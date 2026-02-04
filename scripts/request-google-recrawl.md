@@ -17,11 +17,11 @@ Google AI Studio and Google Search are showing OLD DELETED articles that no long
 **Effort:** 5 minutes
 
 1. **Visit:** https://search.google.com/search-console
-2. **Select your property:** pickpoynt.com
+2. **Select your property:** DecorPoynt.com
 3. **Click "Removals"** in left sidebar
 4. **Click "New Request"**
 5. **For EACH old article URL:**
-   - Enter full URL (e.g., `https://www.pickpoynt.com/billionaire-brain-wave-reviews`)
+   - Enter full URL (e.g., `https://www.DecorPoynt.com/billionaire-brain-wave-reviews`)
    - Select: "Temporarily remove URL from Google"
    - Click "Submit"
 
@@ -33,7 +33,7 @@ Google AI Studio and Google Search are showing OLD DELETED articles that no long
 1. **Visit:** https://search.google.com/search-console
 2. **Click "URL Inspection"** (top search bar)
 3. **For EACH old article URL:**
-   - Paste URL: `https://www.pickpoynt.com/billionaire-brain-wave-reviews`
+   - Paste URL: `https://www.DecorPoynt.com/billionaire-brain-wave-reviews`
    - Click "Test Live URL"
    - Google will see your **410 status**
    - Click "Request Indexing"
@@ -56,7 +56,7 @@ Google AI Studio and Google Search are showing OLD DELETED articles that no long
 
 ### Check what Google knows about your site:
 
-1. **Google Search:** `site:pickpoynt.com`
+1. **Google Search:** `site:DecorPoynt.com`
 2. **Look for old article titles** you recognize
 3. **Copy those URLs**
 4. **Submit them for removal** (Method 1 above)
@@ -64,10 +64,10 @@ Google AI Studio and Google Search are showing OLD DELETED articles that no long
 ### Common patterns to check:
 
 ```
-site:pickpoynt.com billionaire
-site:pickpoynt.com brainwave
-site:pickpoynt.com parasite
-site:pickpoynt.com manifestation
+site:DecorPoynt.com billionaire
+site:DecorPoynt.com brainwave
+site:DecorPoynt.com parasite
+site:DecorPoynt.com manifestation
 ```
 
 ---
@@ -75,22 +75,22 @@ site:pickpoynt.com manifestation
 ## Verify Your Site is Working Correctly
 
 ### Test 1: Check your homepage
-Visit: https://www.pickpoynt.com  
+Visit: https://www.DecorPoynt.com  
 **Expected:** "No stories published yet"  
 **✅ PASSING**
 
 ### Test 2: Check database
-Visit: https://www.pickpoynt.com/api/check-db  
+Visit: https://www.DecorPoynt.com/api/check-db  
 **Expected:** `"articles": {"count": 0}`  
 **✅ PASSING**
 
 ### Test 3: Check deleted article returns 410
-Visit: https://www.pickpoynt.com/billionaire-brain-wave-reviews  
+Visit: https://www.DecorPoynt.com/billionaire-brain-wave-reviews  
 **Expected:** 410 Gone error  
 **✅ PASSING**
 
 ### Test 4: Check sitemap
-Visit: https://www.pickpoynt.com/sitemap.xml  
+Visit: https://www.DecorPoynt.com/sitemap.xml  
 **Expected:** No deleted articles listed  
 **✅ PASSING**
 

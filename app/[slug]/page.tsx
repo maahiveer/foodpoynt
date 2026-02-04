@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArticlePageProps) {
   const { slug } = await params
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
 
   // Reject reserved paths
   const reservedPaths = ['', 'about', 'contact', 'privacy', 'terms', 'admin', 'articles', 'preview']
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
       title: extractedTitle,
       description: description,
       keywords: article.tags?.join(', ') || '',
-      authors: [{ name: article.user_profiles?.full_name || 'PickPoynt Author' }],
+      authors: [{ name: article.user_profiles?.full_name || 'decorPoynt Author' }],
       robots: {
         index: true,
         follow: true,
@@ -95,11 +95,11 @@ export async function generateMetadata({ params }: ArticlePageProps) {
         title: extractedTitle,
         description: description,
         url: articleUrl,
-        siteName: 'PickPoynt',
+        siteName: 'decorPoynt',
         type: 'article',
         publishedTime: article.published_at,
         modifiedTime: article.updated_at,
-        authors: [article.user_profiles?.full_name || 'PickPoynt Author'],
+        authors: [article.user_profiles?.full_name || 'decorPoynt Author'],
         tags: article.tags || [],
         images: article.featured_image ? [
           {
@@ -122,7 +122,7 @@ export async function generateMetadata({ params }: ArticlePageProps) {
         title: extractedTitle,
         description: description,
         images: article.featured_image ? [article.featured_image] : ['/og-image.png'],
-        creator: '@pickpoynt',
+        creator: '@decorpoynt',
       },
       alternates: {
         canonical: articleUrl,
@@ -179,7 +179,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       'Untitled Article'
 
     // Generate structured data for SEO
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -188,11 +188,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       "image": article.featured_image || `${siteUrl}/og-image.png`,
       "author": {
         "@type": "Person",
-        "name": article.user_profiles?.full_name || "PickPoynt Author"
+        "name": article.user_profiles?.full_name || "decorPoynt Author"
       },
       "publisher": {
         "@type": "Organization",
-        "name": "PickPoynt",
+        "name": "decorPoynt",
         "logo": {
           "@type": "ImageObject",
           "url": `${siteUrl}/logo.png`
@@ -263,7 +263,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 dark:text-slate-400 mb-8 border-t border-b border-slate-100 dark:border-slate-700 py-4">
                 <div className="flex items-center">
                   <User className="h-4 w-4 mr-2 text-blue-500" />
-                  <span className="font-medium">{article.user_profiles?.full_name || "PickPoynt Author"}</span>
+                  <span className="font-medium">{article.user_profiles?.full_name || "decorPoynt Author"}</span>
                 </div>
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-2 text-blue-500" />

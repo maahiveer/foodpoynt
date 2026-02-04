@@ -10,10 +10,10 @@
 
 ### 1. Main Layout (`app/layout.tsx`)
 **Changed from Pickleball to Recipe Blog:**
-- **Title**: "PickPoynt - Elevate Your Game" → "PickPoynt - Delicious Recipes & Culinary Inspiration"
+- **Title**: "DecorPoynt - Elevate Your Game" → "DecorPoynt - Delicious Recipes & Culinary Inspiration"
 - **Description**: "Your go-to source for Pickleball insights, gear guides, and court-side stories" → "Your go-to source for delicious recipes, cooking tips, and culinary inspiration. From quick weeknight dinners to gourmet delights."
 - **Keywords**: ["pickleball", "pickleball gear", "sports", "blog"] → ["recipes", "cooking", "food blog", "culinary", "cooking tips", "meal ideas"]
-- **Twitter Title**: "PickPoynt - Decisions made simple" → "PickPoynt - Delicious Recipes & Cooking Tips"
+- **Twitter Title**: "DecorPoynt - Decisions made simple" → "DecorPoynt - Delicious Recipes & Cooking Tips"
 - **Twitter Description**: Updated to recipe-focused content
 
 ### 2. About Page (`app/about/page.tsx`)
@@ -24,7 +24,7 @@
 - **Bio Section**: 
   - "Why I Love Pickleball" → "Why I Love Cooking"
   - Updated all content to focus on cooking journey, kitchen experiences, and recipe testing
-  - "The PickPoynt Mission" updated to focus on kitchen-tested recipes instead of player-tested gear
+  - "The DecorPoynt Mission" updated to focus on kitchen-tested recipes instead of player-tested gear
 
 ### 3. Articles Page (`app/articles/page.tsx`)
 **Changed:**
@@ -45,7 +45,7 @@
 3. 🔄 **Recommended**: Update category names in database to recipe-related categories (e.g., "Breakfast", "Dinner", "Desserts", "Quick Meals", etc.)
 4. 🔄 **Recommended**: Create new recipe articles with proper schema markup
 5. 🔄 **Recommended**: Update images (featured images, og-image.png) to food/recipe related images
-6. 🔄 **Recommended**: Update social media handles if needed (@pickpoynt references)
+6. 🔄 **Recommended**: Update social media handles if needed (@DecorPoynt references)
 
 ## Files Modified
 1. `app/layout.tsx` - Main site metadata

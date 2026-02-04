@@ -3,8 +3,8 @@ import { BlogFooter } from '@/components/BlogFooter'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Privacy Policy - PickPoynt',
-  description: 'Privacy Policy for PickPoynt. Learn how we collect, use, and protect your personal information.',
+  title: 'Privacy Policy - decorPoynt',
+  description: 'Privacy Policy for decorPoynt. Learn how we collect, use, and protect your personal information.',
 }
 
 async function getCategories() {
@@ -122,8 +122,8 @@ export default async function PrivacyPage() {
                   If you have any questions about this Privacy Policy, please contact us at:
                 </p>
                 <p className="mb-4">
-                  Email: privacy@pickpoynt.com<br />
-                  Address: PickPoynt, Privacy Department
+                  Email: privacy@decorPoynt.com<br />
+                  Address: decorPoynt, Privacy Department
                 </p>
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Changes to This Policy</h2>

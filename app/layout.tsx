@@ -13,18 +13,18 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.pickpoynt.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "PickPoynt - Modern Home Decor & Interior Design Inspiration",
-    template: "%s | PickPoynt"
+    default: "decorPoynt - Modern Home Decor & Interior Design Inspiration",
+    template: "%s | decorPoynt"
   },
   alternates: {
     canonical: './',
   },
-  description: "Transform your living space with PickPoynt. Discover modern home decor ideas, interior design tips, and DIY styling guides for every room.",
+  description: "Transform your living space with decorPoynt. Discover modern home decor ideas, interior design tips, and DIY styling guides for every room.",
   keywords: ["home decor", "interior design", "modern furniture", "lighting ideas", "room styling", "DIY decor"],
   authors: [{ name: "Devika Nanda" }],
   creator: "Devika Nanda",
@@ -44,24 +44,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'PickPoynt',
-    title: 'PickPoynt - Modern Home Decor & Interior Design Inspiration',
-    description: "Transform your living space with PickPoynt. Discover modern home decor ideas and room styling guides.",
+    siteName: 'decorPoynt',
+    title: 'decorPoynt - Modern Home Decor & Interior Design Inspiration',
+    description: "Transform your living space with decorPoynt. Discover modern home decor ideas and room styling guides.",
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'PickPoynt',
+        alt: 'decorPoynt',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PickPoynt - Modern Home Decor & Interior Design Inspiration',
-    description: 'Transform your living space with PickPoynt. Discover modern home decor ideas and room styling guides.',
+    title: 'decorPoynt - Modern Home Decor & Interior Design Inspiration',
+    description: 'Transform your living space with decorPoynt. Discover modern home decor ideas and room styling guides.',
     images: ['/og-image.png'],
-    creator: '@pickpoynt',
+    creator: '@decorpoynt',
   },
   icons: {
     icon: [

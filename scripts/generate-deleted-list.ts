@@ -200,7 +200,7 @@ export function isDeleted(pathname: string): boolean {
     console.log(`📁 File saved to: ${outputPath}`)
 
     // Also generate a list for Google Search Console removal
-    const urlList = toDelete.map(a => `https://pickpoynt.com/${a.slug}`).join('\n')
+    const urlList = toDelete.map(a => `https://DecorPoynt.com/${a.slug}`).join('\n')
     const urlListPath = path.join(process.cwd(), 'scripts', 'urls-to-remove.txt')
     fs.writeFileSync(urlListPath, urlList, 'utf-8')
 

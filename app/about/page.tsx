@@ -4,8 +4,8 @@ import { Mail, Youtube, Linkedin, Twitter } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'About Devika Nanda - Interior Design Enthusiast & Founder of PickPoynt',
-  description: 'Meet Devika Nanda, the founder of PickPoynt. A passionate designer sharing modern home decor ideas, interior design tips, and sustainable living advice.',
+  title: 'About Devika Nanda - Interior Design Enthusiast & Founder of decorPoynt',
+  description: 'Meet Devika Nanda, the founder of decorPoynt. A passionate designer sharing modern home decor ideas, interior design tips, and sustainable living advice.',
 }
 
 async function getCategories() {
@@ -111,16 +111,16 @@ export default async function AboutPage() {
                           I spend my weekends scouting for unique <strong>decor</strong>, experimenting with color palettes, and refining the flow of my home. Whether it&apos;s finding the perfect statement lighting or mastering the art of shelf styling, I live for the design details.
                         </p>
                         <p>
-                          Home decor isn&apos;t just a hobby to me; it&apos;s a way to express ourselves and create comfort. But finding reliable, practical design advice can be overwhelming. That&apos;s why I started PickPoynt—to share my design experiences and help you create a home you truly love.
+                          Home decor isn&apos;t just a hobby to me; it&apos;s a way to express ourselves and create comfort. But finding reliable, practical design advice can be overwhelming. That&apos;s why I started decorPoynt—to share my design experiences and help you create a home you truly love.
                         </p>
                       </div>
                     </section>
 
                     <section>
-                      <h3 className="text-2xl font-bold text-white mb-4">The PickPoynt Mission</h3>
+                      <h3 className="text-2xl font-bold text-white mb-4">The decorPoynt Mission</h3>
                       <div className="space-y-4">
                         <p>
-                          My mission with PickPoynt is simple: to create a resource that is packed with genuine, design-tested advice. I believe that the most beautiful homes aren&apos;t always the most expensive—it&apos;s about what works best for your space and lifestyle.
+                          My mission with decorPoynt is simple: to create a resource that is packed with genuine, design-tested advice. I believe that the most beautiful homes aren&apos;t always the most expensive—it&apos;s about what works best for your space and lifestyle.
                         </p>
                         <p>
                           Every guide on this site comes from real-world design projects and styling sessions. Whether I&apos;m analyzing furniture durability or room layouts, my goal is to give you the honest information you need to create a beautiful, comfortable home.
@@ -136,15 +136,15 @@ export default async function AboutPage() {
                 <h3 className="text-2xl font-bold text-white mb-8 text-center">Let&apos;s Connect</h3>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a
-                    href="mailto:hello@pickpoynt.com"
+                    href="mailto:hello@decorpoynt.com"
                     className="flex items-center px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:border-amber-500/50 transition-all text-gray-300 font-medium"
                   >
                     <Mail className="h-5 w-5 mr-3 text-amber-400" />
-                    hello@pickpoynt.com
+                    hello@decorpoynt.com
                   </a>
 
                   <a
-                    href="https://youtube.com/@pickpoynt"
+                    href="https://youtube.com/@decorpoynt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:border-red-500/50 transition-all text-gray-300 font-medium"
@@ -154,7 +154,7 @@ export default async function AboutPage() {
                   </a>
 
                   <a
-                    href="https://twitter.com/pickpoynt"
+                    href="https://twitter.com/decorpoynt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:border-sky-500/50 transition-all text-gray-300 font-medium"

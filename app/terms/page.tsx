@@ -3,8 +3,8 @@ import { BlogFooter } from '@/components/BlogFooter'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Terms of Service - PickPoynt',
-  description: 'Terms of Service for PickPoynt. Read our terms and conditions for using our website and services.',
+  title: 'Terms of Service - decorPoynt',
+  description: 'Terms of Service for decorPoynt. Read our terms and conditions for using our website and services.',
 }
 
 async function getCategories() {
@@ -56,14 +56,14 @@ export default async function TermsPage() {
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Acceptance of Terms</h2>
                 <p className="mb-4">
-                  By accessing and using PickPoynt, you accept and agree to be bound by the
+                  By accessing and using decorPoynt, you accept and agree to be bound by the
                   terms and provision of this agreement. If you do not agree to abide by the above,
                   please do not use this service.
                 </p>
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Use License</h2>
                 <p className="mb-4">
-                  Permission is granted to temporarily download one copy of the materials on PickPoynt
+                  Permission is granted to temporarily download one copy of the materials on decorPoynt
                   for personal, non-commercial transitory viewing only. This is the grant of a license,
                   not a transfer of title, and under this license you may not:
                 </p>
@@ -95,8 +95,8 @@ export default async function TermsPage() {
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Intellectual Property</h2>
                 <p className="mb-4">
-                  The content on PickPoynt, including but not limited to text, graphics, logos,
-                  images, and software, is the property of PickPoynt and is protected by copyright
+                  The content on decorPoynt, including but not limited to text, graphics, logos,
+                  images, and software, is the property of decorPoynt and is protected by copyright
                   and other intellectual property laws.
                 </p>
 
@@ -108,20 +108,20 @@ export default async function TermsPage() {
                 <ul className="list-disc pl-6 mb-4">
                   <li>Advertisements may be displayed on the website</li>
                   <li>We may receive compensation for displaying advertisements</li>
-                  <li>Advertisements are not endorsements by PickPoynt</li>
+                  <li>Advertisements are not endorsements by decorPoynt</li>
                   <li>You interact with advertisements at your own risk</li>
                 </ul>
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Disclaimer</h2>
                 <p className="mb-4">
                   The information on this website is provided on an "as is" basis. To the fullest extent
-                  permitted by law, PickPoynt excludes all representations, warranties, conditions
+                  permitted by law, decorPoynt excludes all representations, warranties, conditions
                   and terms relating to our website and the use of this website.
                 </p>
 
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mt-8 mb-4">Limitation of Liability</h2>
                 <p className="mb-4">
-                  In no event shall PickPoynt, nor its directors, employees, partners, agents, suppliers,
+                  In no event shall decorPoynt, nor its directors, employees, partners, agents, suppliers,
                   or affiliates, be liable for any indirect, incidental, special, consequential, or punitive
                   damages, including without limitation, loss of profits, data, use, goodwill, or other
                   intangible losses.
@@ -145,8 +145,8 @@ export default async function TermsPage() {
                   If you have any questions about these Terms of Service, please contact us at:
                 </p>
                 <p className="mb-4">
-                  Email: legal@pickpoynt.com<br />
-                  Address: PickPoynt, Legal Department
+                  Email: legal@decorPoynt.com<br />
+                  Address: decorPoynt, Legal Department
                 </p>
               </div>
             </article>

@@ -20,10 +20,10 @@ export function middleware(request: NextRequest) {
   }
 
   // Block indexing on *.vercel.app domains to prevent duplicate content
-  // AND ensure we never block the primary domain (pickpoynt.com)
+  // AND ensure we never block the primary domain (DecorPoynt.com)
   const hostname = request.headers.get('host') || ''
   const isVercelDomain = hostname.endsWith('.vercel.app');
-  const isPrimaryDomain = hostname === 'www.pickpoynt.com' || hostname === 'pickpoynt.com';
+  const isPrimaryDomain = hostname === 'www.DecorPoynt.com' || hostname === 'DecorPoynt.com';
 
   if ((isVercelDomain && !isPrimaryDomain) || pathname.startsWith('/admin')) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow')

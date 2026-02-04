@@ -45,6 +45,11 @@ export function AdScripts() {
                 src="https://data527.click/js/responsive.js"
                 strategy="afterInteractive"
             />
+            {/* Placement Ad Script */}
+            <Script
+                src="https://data527.click/296a99d30ca0fda96692/df4fe355ed/?placementName=default"
+                strategy="afterInteractive"
+            />
         </>
     )
 }

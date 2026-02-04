@@ -12,7 +12,7 @@ Your deleted articles are still showing in Google search results because:
 
 1. **Go to Google Search Console**
    - Visit: https://search.google.com/search-console
-   - Select your property: `pickpoynt.com`
+   - Select your property: `DecorPoynt.com`
 
 2. **Access Removals Tool**
    - Click **"Removals"** in the left sidebar
@@ -20,8 +20,8 @@ Your deleted articles are still showing in Google search results because:
 
 3. **Request Removal for Each Deleted Article**
    - Example URLs to remove:
-     * `https://www.pickpoynt.com/billionaire-brain-wave-reviews`
-     * `https://www.pickpoynt.com/billionaire-brainwave`
+     * `https://www.DecorPoynt.com/billionaire-brain-wave-reviews`
+     * `https://www.DecorPoynt.com/billionaire-brainwave`
      * (Add all other deleted article URLs)
    
 4. **Choose Removal Type**
@@ -106,13 +106,13 @@ When you delete an article in the future:
 ### Check if 410 is Working:
 
 **Method 1: Browser (Quick)**
-1. Visit: `https://www.pickpoynt.com/billionaire-brain-wave-reviews`
+1. Visit: `https://www.DecorPoynt.com/billionaire-brain-wave-reviews`
 2. You should see: "Gone - This content has been permanently removed"
 3. Open DevTools → Network tab → Check status: `410`
 
 **Method 2: Command Line**
 ```bash
-curl -I https://www.pickpoynt.com/billionaire-brain-wave-reviews
+curl -I https://www.DecorPoynt.com/billionaire-brain-wave-reviews
 ```
 Should show: `HTTP/2 410`
 
@@ -148,7 +148,7 @@ If articles are still showing after 48 hours:
 1. Check Google Search Console → Coverage Report
 2. Look for "Submitted URL returned 410" (this is GOOD!)
 3. Use the Removal tool for immediate removal
-4. Clear Google cache: `cache:pickpoynt.com/article-slug` in Google search
+4. Clear Google cache: `cache:DecorPoynt.com/article-slug` in Google search
 
 ---
 

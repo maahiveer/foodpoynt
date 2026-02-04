@@ -5,13 +5,13 @@
 
 // List of old article URLs that should be deleted
 const OLD_URLS = [
-    'https://pickpoynt.com/agility-writer-review',
-    'https://pickpoynt.com/babygrowth-review',
-    'https://pickpoynt.com/billionaire-brain-wave-reviews',
-    'https://pickpoynt.com/billionaire-brainwave',
-    'https://pickpoynt.com/manifesting-abundance',
-    'https://pickpoynt.com/wealth-manifestation',
-    'https://pickpoynt.com/attract-money-fast',
+    'https://DecorPoynt.com/agility-writer-review',
+    'https://DecorPoynt.com/babygrowth-review',
+    'https://DecorPoynt.com/billionaire-brain-wave-reviews',
+    'https://DecorPoynt.com/billionaire-brainwave',
+    'https://DecorPoynt.com/manifesting-abundance',
+    'https://DecorPoynt.com/wealth-manifestation',
+    'https://DecorPoynt.com/attract-money-fast',
 ]
 
 async function checkUrls() {

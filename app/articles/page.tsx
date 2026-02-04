@@ -9,8 +9,8 @@ export const dynamic = 'force-dynamic'
 const ARTICLES_PER_PAGE = 12
 
 export const metadata = {
-    title: 'All Decor Guides - PickPoynt',
-    description: 'Browse all expert home decor guides and interior design tips on PickPoynt',
+    title: 'All Decor Guides - decorPoynt',
+    description: 'Browse all expert home decor guides and interior design tips on decorPoynt',
 }
 
 async function getCategories() {

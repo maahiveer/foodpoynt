@@ -43,7 +43,7 @@ export default async function Home() {
       {/* Navigation / Header */}
       <header className="container mx-auto px-6 py-6 flex items-center justify-between z-20 relative">
         <div className="font-mono text-lg tracking-wider font-bold">
-          PickPoynt&trade;
+          decorPoynt&trade;
         </div>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
           <Link href="/about" className="hover:text-white transition-colors">About</Link>
@@ -136,7 +136,7 @@ export default async function Home() {
 
       {/* Footer Simple */}
       <footer className="border-t border-white/5 py-12 text-center text-sm text-gray-600">
-        <p>&copy; {new Date().getFullYear()} PickPoynt. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} decorPoynt. All rights reserved.</p>
       </footer>
     </main>
   )

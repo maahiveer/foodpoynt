@@ -82,11 +82,11 @@
    - 1024px (Desktop)
 
 3. **Test specific pages:**
-   - Homepage: https://www.pickpoynt.com/
+   - Homepage: https://www.DecorPoynt.com/
    - Review pages:
-     - https://www.pickpoynt.com/babylovegrowth-ai-review
-     - https://www.pickpoynt.com/billionaire-brainwave-reviews
-     - https://www.pickpoynt.com/energy-revolution-system-review
+     - https://www.DecorPoynt.com/babylovegrowth-ai-review
+     - https://www.DecorPoynt.com/billionaire-brainwave-reviews
+     - https://www.DecorPoynt.com/energy-revolution-system-review
 
 ### Performance Testing
 1. **Lighthouse Audit** (Chrome DevTools):

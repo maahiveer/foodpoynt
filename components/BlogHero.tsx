@@ -21,27 +21,27 @@ export function BlogHero() {
 
             <div className="space-y-6">
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                Grow faster with{' '}
-                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-violet-300 bg-clip-text text-transparent">
-                  no-fluff tech reviews & playbooks
+                Design your dream home with{' '}
+                <span className="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-200 bg-clip-text text-transparent">
+                  expert decor guides & styling playbooks
                 </span>
               </h1>
               <p className="text-lg leading-relaxed text-slate-200">
-                PickPoynt curates deep-dive reviews, experimentation logs, and practical frameworks
-                for modern builders. Every guide is battle tested on real products, not written by AI
-                on autopilot.
+                decorPoynt curates inspired interior design tips, DIY home decor projects, and practical
+                styling frameworks for modern homeowners. Every guide is hand-crafted by design experts
+                to help you transform your space.
               </p>
             </div>
 
             <ul className="grid gap-4 text-sm text-slate-200 sm:grid-cols-2">
               {[
-                'Independent testing across AI, SaaS, and creator tools',
-                'Playbooks for shipping content, workflows, and revenue faster',
-                'Weekly benchmarks & teardowns of high-performing campaigns',
-                'Actionable checklists you can run with your team today'
+                'Expert interior design tips for every budget',
+                'Step-by-step DIY decor projects and room makeovers',
+                'Curated furniture and lighting recommendations',
+                'Color palette guides and seasonal styling trends'
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full border border-emerald-300/30 bg-emerald-400/10 text-emerald-200">
+                  <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full border border-amber-300/30 bg-amber-400/10 text-amber-200">
                     ✓
                   </span>
                   <span>{item}</span>
@@ -87,11 +87,11 @@ export function BlogHero() {
               Free Newsletter
             </p>
             <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">
-              Get the Monday Signals briefing
+              Get the Weekly Inspiration briefing
             </h3>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              One actionable teardown, two AI workflows, and a monetization benchmark delivered every
-              Monday. No spam, only experiments that moved our own metrics.
+              One actionable room makeover, two DIY decor hacks, and a seasonal design trend delivered
+              every Monday. No spam, only inspired design tips to elevate your home.
             </p>
 
             <form className="mt-8 space-y-4" action="https://app.convertkit.com/forms" method="POST">
@@ -106,8 +106,8 @@ export function BlogHero() {
                   id="subscriber-name"
                   name="name"
                   type="text"
-                  placeholder="Avery"
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white"
+                  placeholder="Sarah"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white"
                 />
               </div>
               <div>
@@ -115,22 +115,22 @@ export function BlogHero() {
                   htmlFor="subscriber-email"
                   className="block text-sm font-medium text-slate-700 dark:text-slate-200"
                 >
-                  Work email
+                  Email address
                 </label>
                 <input
                   id="subscriber-email"
                   name="email"
                   type="email"
                   required
-                  placeholder="you@company.com"
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white"
+                  placeholder="sarah@example.com"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/30 dark:border-slate-700 dark:bg-slate-900/50 dark:text-white"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/30 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 dark:bg-blue-600 dark:hover:bg-blue-500"
+                className="w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/30 transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 dark:bg-amber-600 dark:hover:bg-amber-500"
               >
-                Subscribe & get the latest teardown
+                Subscribe to get design alerts
               </button>
             </form>
 
@@ -139,16 +139,16 @@ export function BlogHero() {
                 <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">
                   ✓
                 </span>
-                Zero spam. Unsubscribe anytime with one click.
+                Zero spam. Inspired home decor delivered weekly.
               </p>
               <p className="flex items-center gap-2">
                 <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">
                   ✓
                 </span>
-                12,000+ founders, PMs, and growth leads already onboard.
+                12,000+ interior design enthusiasts already onboard.
               </p>
               <p className="text-[11px]">
-                By subscribing you agree to receive PickPoynt updates. We respect your inbox and only
+                By subscribing you agree to receive decorPoynt updates. We respect your inbox and only
                 send value.
               </p>
             </div>
