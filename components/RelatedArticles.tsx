@@ -43,9 +43,9 @@ export function RelatedArticles({ currentArticleId, currentTags = [], limit = 3 
 
                 // If we have tags, prioritize articles with matching tags
                 if (data && currentTags.length > 0) {
-                    const sorted = data.sort((a, b) => {
-                        const aMatches = a.tags?.filter(tag => currentTags.includes(tag)).length || 0
-                        const bMatches = b.tags?.filter(tag => currentTags.includes(tag)).length || 0
+                    const sorted = data.sort((a: any, b: any) => {
+                        const aMatches = a.tags?.filter((tag: string) => currentTags.includes(tag)).length || 0
+                        const bMatches = b.tags?.filter((tag: string) => currentTags.includes(tag)).length || 0
                         return bMatches - aMatches
                     })
                     setArticles(sorted)
