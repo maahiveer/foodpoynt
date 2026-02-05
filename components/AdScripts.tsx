@@ -45,9 +45,9 @@ export function AdScripts() {
                 src="https://data527.click/js/responsive.js"
                 strategy="afterInteractive"
             />
-            {/* Placement Ad Script */}
+            {/* Adsterra Pop-under Script */}
             <Script
-                src="https://data527.click/296a99d30ca0fda96692/df4fe355ed/?placementName=default"
+                src="https://pl28648479.effectivegatecpm.com/aa/90/72/aa907216629ecee5bf233dfb8657499a.js"
                 strategy="afterInteractive"
             />
         </>
