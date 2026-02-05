@@ -19,13 +19,20 @@ interface RelatedArticlesProps {
     currentArticleId: string
     currentTags?: string[]
     limit?: number
+    initialArticles?: any[] // Accept server-fetched articles
 }
 
-export function RelatedArticles({ currentArticleId, currentTags = [], limit = 3 }: RelatedArticlesProps) {
-    const [articles, setArticles] = useState<Article[]>([])
-    const [loading, setLoading] = useState(true)
+export function RelatedArticles({ currentArticleId, currentTags = [], limit = 3, initialArticles }: RelatedArticlesProps) {
+    const [articles, setArticles] = useState<Article[]>(initialArticles || [])
+    const [loading, setLoading] = useState(!initialArticles)
 
     useEffect(() => {
+        if (initialArticles) {
+            setArticles(initialArticles)
+            setLoading(false)
+            return
+        }
+
         async function fetchRelatedArticles() {
             try {
                 const { data, error } = await supabase

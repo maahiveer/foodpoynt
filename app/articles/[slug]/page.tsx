@@ -39,6 +39,23 @@ async function getArticle(slug: string) {
   }
 }
 
+async function getRecentArticles(currentId: string) {
+  try {
+    const { data } = await supabase
+      .from('articles')
+      .select('id, title, slug, excerpt, featured_image, published_at, tags')
+      .eq('status', 'published')
+      .neq('id', currentId)
+      .order('published_at', { ascending: false })
+      .limit(3);
+
+    return data || [];
+  } catch (error) {
+    console.error('Error fetching recent articles:', error);
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params
 
@@ -98,6 +115,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) {
     notFound()
   }
+
+  // Fetch recent articles on the server
+  const recentArticles = await getRecentArticles(article.id || '');
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
 
@@ -174,6 +194,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             currentArticleId={article.id}
             currentTags={article.tags || []}
             limit={3}
+            initialArticles={recentArticles}
           />
         </div>
       </main>
