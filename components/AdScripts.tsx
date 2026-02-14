@@ -40,16 +40,6 @@ export function AdScripts() {
 
     return (
         <>
-            {/* Responsive Ad Script */}
-            <Script
-                src="https://data527.click/js/responsive.js"
-                strategy="afterInteractive"
-            />
-            {/* Adsterra Pop-under Script */}
-            <Script
-                src="https://pl28648479.effectivegatecpm.com/aa/90/72/aa907216629ecee5bf233dfb8657499a.js"
-                strategy="afterInteractive"
-            />
             {/* Social Bar Script */}
             <Script
                 src="https://pl28711654.effectivegatecpm.com/1d/54/f7/1d54f7eca0512bc08faa2af5d9e11b20.js"
