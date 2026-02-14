@@ -52,7 +52,7 @@ export function AdScripts() {
             />
             {/* Social Bar Script */}
             <Script
-                src="https://pl28651807.effectivegatecpm.com/bf/27/4f/bf274f018156e7a4f1be874ff6c82e0e.js"
+                src="https://pl28711654.effectivegatecpm.com/1d/54/f7/1d54f7eca0512bc08faa2af5d9e11b20.js"
                 strategy="afterInteractive"
             />
         </>
