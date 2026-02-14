@@ -7,12 +7,6 @@ export function BannerAd() {
     const [showAds, setShowAds] = useState(false)
 
     useEffect(() => {
-        // Don't show ads in development (localhost)
-        if (window.location.hostname === 'localhost') {
-            setShowAds(false)
-            return
-        }
-
         // Check URL for hideads=1
         const urlParams = new URLSearchParams(window.location.search)
         const urlHide = urlParams.get('hideads') === '1'
@@ -34,13 +28,13 @@ export function BannerAd() {
 
     return (
         <div className="w-full flex justify-center my-4">
-            <div id="banner-ad-container" className="max-w-[728px] w-full">
+            <div id="banner-ad-container" className="max-w-[728px] w-full mx-auto">
                 <Script
                     id="banner-ad-config"
                     strategy="afterInteractive"
                     dangerouslySetInnerHTML={{
                         __html: `
-                            atOptions = {
+                            window.atOptions = {
                                 'key' : '52813a46cbe04fab2ed2ab6687156450',
                                 'format' : 'iframe',
                                 'height' : 90,
@@ -51,7 +45,7 @@ export function BannerAd() {
                     }}
                 />
                 <Script
-                    src="https://www.highperformanceformat.com/52813a46cbe04fab2ed2ab6687156450/invoke.js"
+                    src="//www.highperformanceformat.com/52813a46cbe04fab2ed2ab6687156450/invoke.js"
                     strategy="afterInteractive"
                 />
             </div>
