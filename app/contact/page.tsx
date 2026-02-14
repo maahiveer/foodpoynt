@@ -5,8 +5,8 @@ import { Mail, Phone, MapPin } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Contact Us - decorPoynt',
-  description: 'Get in touch with the decorPoynt team. We are here to answer your questions and hear your feedback.',
+  title: 'Contact Us - foodPoynt',
+  description: 'Get in touch with the foodPoynt team. We are here to answer your cooking questions and hear your feedback.',
 }
 
 async function getCategories() {
@@ -52,7 +52,7 @@ export default async function ContactPage() {
               </h1>
 
               <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 text-center">
-                Have a question, suggestion, or want to collaborate? We'd love to hear from you!
+                Have a recipe question, suggestion, or want to collaborate? We'd love to hear from you!
               </p>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -69,7 +69,7 @@ export default async function ContactPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-slate-900 dark:text-slate-100">Email</h3>
-                        <p className="text-slate-600 dark:text-slate-400">hello@decorPoynt.com</p>
+                        <p className="text-slate-600 dark:text-slate-400">hello@foodpoynt.com</p>
                         <p className="text-sm text-slate-500 dark:text-slate-500">We'll respond within 24 hours</p>
                       </div>
                     </div>

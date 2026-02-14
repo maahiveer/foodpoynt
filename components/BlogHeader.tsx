@@ -31,7 +31,7 @@ export function BlogHeader({ categories = [], theme = 'dark' }: BlogHeaderProps)
           <Link href="/" className="flex items-center">
             <div className={`font-mono text-lg tracking-wider font-bold transition-colors ${isDark ? 'text-white' : 'text-slate-900'
               }`}>
-              decorPoynt&trade;
+              foodPoynt&trade;
             </div>
           </Link>
 

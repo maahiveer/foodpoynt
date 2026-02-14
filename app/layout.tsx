@@ -13,19 +13,19 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.decorpoynt.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.foodpoynt.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "decorPoynt - Modern Home Decor & Interior Design Inspiration",
-    template: "%s | decorPoynt"
+    default: "foodPoynt - Culinary Adventures & Delicious Recipes",
+    template: "%s | foodPoynt"
   },
   alternates: {
     canonical: './',
   },
-  description: "Transform your living space with decorPoynt. Discover modern home decor ideas, interior design tips, and DIY styling guides for every room.",
-  keywords: ["home decor", "interior design", "modern furniture", "lighting ideas", "room styling", "DIY decor"],
+  description: "Discover mouth-watering recipes, cooking tips, and culinary inspiration with foodPoynt. From comfort food to exotic drinks, elevate your kitchen skills today.",
+  keywords: ["recipes", "cooking", "food", "drinks", "culinary", "baking", "cocktails", "classic dishes", "restaurant reviews"],
   authors: [{ name: "Devika Nanda" }],
   creator: "Devika Nanda",
   publisher: "Devika Nanda",
@@ -44,24 +44,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'decorPoynt',
-    title: 'decorPoynt - Modern Home Decor & Interior Design Inspiration',
-    description: "Transform your living space with decorPoynt. Discover modern home decor ideas and room styling guides.",
+    siteName: 'foodPoynt',
+    title: 'foodPoynt - Culinary Adventures & Delicious Recipes',
+    description: "Discover mouth-watering recipes, cooking tips, and culinary inspiration with foodPoynt. From comfort food to exotic drinks, elevate your kitchen skills today.",
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'decorPoynt',
+        alt: 'foodPoynt',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'decorPoynt - Modern Home Decor & Interior Design Inspiration',
-    description: 'Transform your living space with decorPoynt. Discover modern home decor ideas and room styling guides.',
+    title: 'foodPoynt - Culinary Adventures & Delicious Recipes',
+    description: "Discover mouth-watering recipes, cooking tips, and culinary inspiration with foodPoynt.",
     images: ['/og-image.png'],
-    creator: '@decorpoynt',
+    creator: '@foodpoynt',
   },
   icons: {
     icon: [
