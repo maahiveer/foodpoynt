@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Script from 'next/script'
 
 export function BannerAd() {
     const [showAds, setShowAds] = useState(false)
@@ -27,26 +26,34 @@ export function BannerAd() {
     if (!showAds) return null
 
     return (
-        <div className="w-full flex justify-center my-4">
-            <div id="banner-ad-container" className="max-w-[728px] w-full mx-auto">
-                <Script
-                    id="banner-ad-config"
-                    strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            window.atOptions = {
-                                'key' : '52813a46cbe04fab2ed2ab6687156450',
-                                'format' : 'iframe',
-                                'height' : 90,
-                                'width' : 728,
-                                'params' : {}
-                            };
-                        `
-                    }}
-                />
-                <Script
-                    src="//www.highperformanceformat.com/52813a46cbe04fab2ed2ab6687156450/invoke.js"
-                    strategy="afterInteractive"
+        <div className="w-full flex justify-center my-4 overflow-hidden">
+            <div id="banner-ad-container" className="max-w-[728px] w-full mx-auto bg-slate-100 dark:bg-slate-800 flex items-center justify-center min-h-[90px]">
+                <iframe
+                    title="Advertisement"
+                    width="728"
+                    height="90"
+                    frameBorder="0"
+                    scrolling="no"
+                    style={{ border: 'none', overflow: 'hidden' }}
+                    srcDoc={`
+                        <html>
+                            <head>
+                                <style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;height:100%;background:transparent;}</style>
+                            </head>
+                            <body>
+                                <script type="text/javascript">
+                                    atOptions = {
+                                        'key' : '52813a46cbe04fab2ed2ab6687156450',
+                                        'format' : 'iframe',
+                                        'height' : 90,
+                                        'width' : 728,
+                                        'params' : {}
+                                    };
+                                </script>
+                                <script type="text/javascript" src="//www.highperformanceformat.com/52813a46cbe04fab2ed2ab6687156450/invoke.js"></script>
+                            </body>
+                        </html>
+                    `}
                 />
             </div>
         </div>
